@@ -3,11 +3,11 @@ const BankAccount = require('../models/peopleBankAccount.js');
 
 
 
-const findAll = BankAccount.findAll()
-  .then(bankAccounts => {
-    console.log("bank accounts: ", bankAccounts);
-  });
+// const findAll = BankAccount.findAll()
+//   .then(bankAccounts => {
+//     console.log("bank accounts: ", bankAccounts);
+//   });
 
-findAll();
+// findAll();
 
 module.exports = router;
