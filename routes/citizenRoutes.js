@@ -1,5 +1,12 @@
 const router = require('express').Router();
 const Citizen = require('../models/citizen.js');
+const { QueryTypes } = require('sequelize');
+const sequelize = require('../utils/database.js');
+
+router.get('/readAll', async (req, res) => {
+    const users = await sequelize.query("SELECT * FROM citizen 0kLIMIT 10", { type: sequelize.QueryTypes.SELECT } ); // this will need changing back to citizen
+    console.log(users);
+    });
 
 
 // const findAll = Citizen.findAll()

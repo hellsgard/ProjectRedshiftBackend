@@ -1,31 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const { QueryTypes } = require('sequelize');
+const sequelize = require('../utils/database.js');
 
-// import in the model
-const { User } = require('../models/users');
 
 
-let username;
-let password;
-let allowLogin = false;
-// read all  - then check for matching against the database
-router.get('readAll', (req, res) => {
-    res.status(202).send(`accessed get all`);
-    let user = res;
-    console.log(user);
-    for (let i = 0; i < user.length; i++) {
-        if (username == i.username) {
-            console.log('username match');
-            if (password == i.password) {
-                console.log('password match');
-                allowLogin = true; }
-            else {
-                    console.log('password doesnt match')
-                } }
-            else {
-            console.log('no user with that username')
-                }
-            }
-    });
+// import in the model - will need to use models for the passport validation
+const {User} = require('../models/users.js');
+
+router.get('/readAll', async (req, res) => {
+const users = await sequelize.query("SELECT * FROM users", { type: sequelize.QueryTypes.SELECT } );
+console.log(users);
+});
+
 
 module.exports = router;

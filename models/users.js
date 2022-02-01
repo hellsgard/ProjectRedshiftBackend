@@ -1,15 +1,15 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const {Sequelize, DataTypes, STRING} = require('sequelize');
 const sequelize = require("../utils/database");
 
 const UserSchema = sequelize.define("user",{
     
     username:{
-        type: String,
+        type: DataTypes.STRING,
         required: true
     },
 
     password:{
-        type: String,
+        type: DataTypes.STRING,
         require: true,
         minLength: 8
     }
