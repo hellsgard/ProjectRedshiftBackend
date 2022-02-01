@@ -19,7 +19,7 @@ app.use('/users', userRoute)
 
 //database connection
 try {
-   sequelize.authenticate();
+  sequelize.authenticate();
   console.log('Connected to DB');
 } catch (error) {
   console.error('Cant connect to DB')
@@ -35,9 +35,6 @@ app.use((err, req, res, next) => {
     res.status(500).send(err.message);
 })
 
-// // DIFFERENT DATABASE CONNECTIONS, FOR TESTING AND PRODUCTION
-// let DBname = `<put DB name in here>`
-// // let DBname = `<Put test DB name in here>`  //                <- Test DB
 
 const server = app.listen(8080, () => {
   console.log(`Server is running on port ${server.address().port}.`);
