@@ -10,6 +10,7 @@ const vehiclesRoute = require('./routes/vehiclesRoute.js')
 const bankCardRoutes = require ('./routes/bankCardRoutes')
 const atmTransactionsRoute = require('./routes/atmTransactions.js')
 const anprCameraRoute = require ('./routes/anprCameraRoute');
+const vehicleObservationsRoutes = require('./routes/vehicleObservationsRoute');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/atmTransactions', atmTransactionsRoute)
 app.use('/atmPoint', atmPointRoute);
 app.use('./vehicles', vehiclesRoute)
 app.use('/anprCamera', anprCameraRoute);
+app.use('/vehicleObservations', vehicleObservationsRoutes);
 
 
 //database connection
