@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Citizen = require('../models/citizen.js');
+const Citizen = require('../models/citizen.js'); // wont need models
 const { QueryTypes } = require('sequelize');
 const sequelize = require('../utils/database.js');
 
