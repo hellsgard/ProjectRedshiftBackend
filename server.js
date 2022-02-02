@@ -4,8 +4,11 @@ const citizenRoute = require('./routes/citizenRoutes.js');
 const peopleBankAccountRoutes = require('./routes/peopleBankAccountRoutes.js');
 const sequelize = require ('./utils/database');
 const userRoute = require ('./routes/userRoute');
+<<<<<<< HEAD
 const atmPointRoute = require ('./routes/atmPointRoute');
 const queryPersonRoute = require('./routes/queryPersonRoute');
+=======
+>>>>>>> f26d50547c6ebb078bc74c8ee0d74b56b6b872ef
 const atmTransactionsRoute = require('./routes/atmTransactionsRoute.js')
 
 const vehiclesRoute = require('./routes/vehiclesRoute.js')
@@ -13,7 +16,6 @@ const bankCardRoutes = require ('./routes/bankCardRoutes')
 const anprCameraRoute = require ('./routes/anprCameraRoute');
 const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
-
 
 const app = express();
 
@@ -24,11 +26,11 @@ app.use(express.json());
 // ROUTES
 app.use('/citizen', citizenRoute);
 app.use('/peopleBankAccount', peopleBankAccountRoutes);
-app.use('/users', userRoute);
 app.use('/users', userRoute)
 app.use('/bankCard', bankCardRoutes);
 app.use('/atmTransactions', atmTransactionsRoute)
 app.use('/atmPoint', atmPointRoute);
+
 
 app.use('/queryPerson', queryPersonRoute);
 app.use('/queryIncident', queryIncidentRoute);
@@ -36,7 +38,6 @@ app.use('/queryFlees', querySuspectFleesRoute);
 
 app.use('./vehicles', vehiclesRoute)
 app.use('/anprCamera', anprCameraRoute);
-
 
 
 //database connection
