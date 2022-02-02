@@ -8,7 +8,6 @@ const atmTransactionsRoute = require('./routes/atmTransactionsRoute.js')
 const atmPointRoute = require ('./routes/atmPointRoute');
 const vehiclesRoute = require('./routes/vehiclesRoute.js')
 const bankCardRoutes = require ('./routes/bankCardRoutes')
-const atmTransactionsRoute = require('./routes/atmTransactions.js')
 const anprCameraRoute = require ('./routes/anprCameraRoute');
 
 const app = express();
