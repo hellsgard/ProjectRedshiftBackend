@@ -6,6 +6,7 @@ const sequelize = require('../utils/database.js');
 router.get('/readAll', async (req, res) => {
     const users = await sequelize.query("SELECT * FROM citizen10k LIMIT 10", { type: sequelize.QueryTypes.SELECT } ); // this will need changing back to citizen
     console.log(users);
+    res.status(200).send(users);
     });
 
 router.get('/readPerson', async (req, res) => {
