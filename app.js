@@ -15,7 +15,7 @@ app.use(express.json());
 // ROUTES
 app.use('/citizen', citizenRoute);
 app.use('/peopleBankAccount', peopleBankAccountRoutes);
-app.use('/users', userRoute)
+app.use('/users', userRoute);
 
 //database connection
 try {
