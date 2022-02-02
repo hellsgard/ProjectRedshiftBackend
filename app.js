@@ -5,6 +5,7 @@ const peopleBankAccountRoutes = require('./routes/peopleBankAccountRoutes.js');
 const sequelize = require ('./utils/database');
 const userRoute = require ('./routes/userRoute');
 const atmTransactionsRoute = require('./routes/atmTransactions.js')
+const atmPointRoute = require ('./routes/atmPointRoute');
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.use('/citizen', citizenRoute);
 app.use('/peopleBankAccount', peopleBankAccountRoutes);
 app.use('/users', userRoute)
 app.use('/atmTransactions', atmTransactionsRoute)
+app.use('/atmPoint', atmPointRoute);
 
 //database connection
 try {
