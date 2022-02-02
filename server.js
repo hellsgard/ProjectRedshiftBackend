@@ -4,11 +4,10 @@ const citizenRoute = require('./routes/citizenRoutes.js');
 const peopleBankAccountRoutes = require('./routes/peopleBankAccountRoutes.js');
 const sequelize = require ('./utils/database');
 const userRoute = require ('./routes/userRoute');
-<<<<<<< HEAD
+
 const atmPointRoute = require ('./routes/atmPointRoute');
 const queryPersonRoute = require('./routes/queryPersonRoute');
-=======
->>>>>>> f26d50547c6ebb078bc74c8ee0d74b56b6b872ef
+
 const atmTransactionsRoute = require('./routes/atmTransactionsRoute.js')
 
 const vehiclesRoute = require('./routes/vehiclesRoute.js')
