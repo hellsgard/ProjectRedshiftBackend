@@ -15,19 +15,14 @@ router.get('/readPerson', async (req, res) => {
 })
 
 
-
-
 // const findAll = Citizen.findAll()
 //   .then(citizens => {
 //     console.log("citi: ", citizens)
 //   });
 
-
 // router.get('/getAll'), (req, res) => {
 //     console.log(findAll);
 // }
-
-
 
 // router.get("/getAll"), (req, res) => {
 //     console.log("Get all citizens");
@@ -36,10 +31,6 @@ router.get('/readPerson', async (req, res) => {
 //     console.log("citi: ", citizens)
 //   });
 // }
-
-
-
-
 
 
 module.exports = router;
