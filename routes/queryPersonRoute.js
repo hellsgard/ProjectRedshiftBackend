@@ -14,8 +14,8 @@ const sequelize = require('../utils/database.js');
 
 router.get('/person', async(req, res) => {
     console.log(req.query)
-    const suspect = await sequelize.query(`SELECT * FROM citizen WHERE surname like '%${req.query.surname}%' AND forenames like '%${req.query.forenames}%'  
-        AND dateOfBirth like '%${req.query.dateOfBirth}%'`, {replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
+    const suspect = await sequelize.query(`SELECT * FROM citizen WHERE surname like '${req.query.surname}%' AND forenames like '${req.query.forenames}%'  
+        AND dateOfBirth like '${req.query.dateOfBirth}%'`, {replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
             type: QueryTypes.SELECT});
                 console.log(suspect);
     res.status(200).send(suspect);
