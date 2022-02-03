@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const citizenRoute = require('./routes/citizenRoutes.js');
+const citizenRoutes = require('./routes/citizenRoutes.js');
 const peopleBankAccountRoutes = require('./routes/peopleBankAccountRoutes.js');
 const userRoute = require ('./routes/userRoute');
 const atmPointRoute = require ('./routes/atmPointRoute');
@@ -26,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-app.use('/citizen', citizenRoute);
+app.use('/citizen', citizenRoutes);
 app.use('/peopleBankAccount', peopleBankAccountRoutes);
 app.use('/bankCard', bankCardRoutes);
 app.use('/atmTransactions', atmTransactionsRoute)
