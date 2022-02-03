@@ -15,4 +15,6 @@ const UserSchema = sequelize.define("user",{
     }
 });
 
+// UserSchema,methods.authenticate = function;
+
 module.exports= UserSchema;
