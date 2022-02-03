@@ -1,5 +1,7 @@
 const {Sequelize, DataTypes, STRING} = require('sequelize');
 const sequelize = require("../utils/database");
+// const passportMysql = require('passport-local-mysql')
+
 
 const UserSchema = sequelize.define("user",{
     
@@ -13,8 +15,11 @@ const UserSchema = sequelize.define("user",{
         require: true,
         minLength: 8
     }
-});
 
-// UserSchema,methods.authenticate = function;
+}, {timestamps:false});
+
+// UserSchema.methods.authenticate = function ;
+
+// UserSchema.plugin(passportMysql);
 
 module.exports= UserSchema;

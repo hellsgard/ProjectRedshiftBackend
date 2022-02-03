@@ -39,43 +39,59 @@ app.use('/anprCamera', anprCameraRoute);
 
 
 // //PASSPORT TRY 2
-// app.use(logger('dev'));
-// app.use(passport.initialize());
+app.use(logger('dev'));
+app.use(passport.initialize());
 // app.use(passport.session());
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// const User = require('./models/users.js');
+// app.use(session);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+const User = require('./models/users.js');
+const bcrypt = require('bcrypt');
 
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
 
-// const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
-// const opts = {}
-// opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-// opts.secretOrKey = 'Marmoset';
-// opts.algorithms = ['HS256'];
+passport.use(new LocalStrategy(function(username, password, done) {
+  User.findOne({where: {username:username}}).then(user => {
+    if (password === user.password) return done(null, user);
+    // if (bcrypt.compare(password, user.password)) return done(null, user);
+      return done (null, false)
+  })
+  .catch(error => done(error, false));
+})); 
 
-// passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-//   User.findById(jwt_payload.sub, function (err, user) {
-//       console.log(err, user);
-//       if (err) {
-//           return done(err, false);
-//       }
-//       if (user) {
-//           return done(null, user);
-//       } else {
-//           return done(null, false);
-//           // or you could create a new account
-//       }
-//   });
-// }));
+// put in a function for authentication here
+passport.serializeUser(function(user,done) {
+  return done(null, user.id);
+}); // keeps a person signed in - but no session..?
+passport.deserializeUser(function(id, done) {
+  User.findByPk(id).then(user => done(null, user)).catch(error => done(error, false));
+}); // for logging out
 
-// app.use('/users', userRoute)
-// app.get('/test', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-//     res.send('bloop');
-// })
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'Marmoset';
+opts.algorithms = ['HS256'];
+
+passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
+  User.findById(jwt_payload.sub, function (err, user) {
+      console.log(err, user);
+      if (err) {
+          return done(err, false);
+      }
+      if (user) {
+          return done(null, user);
+      } else {
+          return done(null, false);
+          // or you could create a new account
+      }
+  });
+}));
+
+app.use('/users', userRoute)
+app.get('/test', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    res.send('bloop');
+})
 
 // PASSPORT
 // app.use(cookieParser());

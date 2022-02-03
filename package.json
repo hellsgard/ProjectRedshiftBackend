@@ -28,7 +28,9 @@
     "nodemon": "^2.0.15",
     "object-assign": "^4.1.1",
     "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "passport-local-mysql": "^5.0.10",
     "sequelize": "^6.15.0",
     "toidentifier": "^1.0.1"
   }
