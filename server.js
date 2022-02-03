@@ -53,10 +53,10 @@ const bcrypt = require('bcrypt');
 passport.use(new LocalStrategy(function(username, password, done) {
   User.findOne({where: {username:username}}).then(user => {
     if (password === user.password) return done(null, user);
-    // if (bcrypt.compare(password, user.password)) return done(null, user);
+    // if (bcrypt.compare(password, user.password)) return done(null, user); // this isnt working yet - returns everything as ok
       return done (null, false)
   })
-  .catch(error => done(error, false));
+  .catch(error => done(error, false)); // put in message here that says wrong
 })); 
 
 // put in a function for authentication here
@@ -89,9 +89,23 @@ passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
 }));
 
 app.use('/users', userRoute)
-app.get('/test', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    res.send('bloop');
-})
+
+app.use(function(err, req, res, next) {
+  console.log(err);
+});
+
+
+// app.get('/test', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+//     res.send('bloop');
+// })
+
+// app.get('/logout', function (req, res){ // for logging out - should this be in the userRoutes?
+//   req.session.destroy(function (err) {
+//     res.redirect('/'); 
+//     console.log('on logout page');
+//   });
+// });
+
 
 // PASSPORT
 // app.use(cookieParser());
