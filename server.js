@@ -9,6 +9,7 @@ const atmTransactionsRoute = require('./routes/atmTransactionsRoute.js')
 const vehiclesRoute = require('./routes/vehiclesRoute.js')
 const bankCardRoutes = require ('./routes/bankCardRoutes')
 const anprCameraRoute = require ('./routes/anprCameraRoute');
+const suspectProfile = require('./routes/suspectProfile');
 const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const passport = require('passport');
@@ -36,6 +37,7 @@ app.use('/queryIncident', queryIncidentRoute);
 app.use('/queryFlees', querySuspectFleesRoute);
 app.use('./vehicles', vehiclesRoute)
 app.use('/anprCamera', anprCameraRoute);
+app.use('/suspectInfo', suspectProfile)
 
 
 // //PASSPORT TRY 2
