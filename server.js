@@ -9,7 +9,6 @@ const atmTransactionsRoute = require('./routes/atmTransactionsRoute.js')
 const vehiclesRoute = require('./routes/vehiclesRoute.js')
 const bankCardRoutes = require ('./routes/bankCardRoutes')
 const anprCameraRoute = require ('./routes/anprCameraRoute');
-const suspectProfile = require('./routes/suspectProfile');
 const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const suspectProfile = require('./routes/suspectProfile.js');
@@ -40,11 +39,7 @@ app.use('/queryIncident', queryIncidentRoute);
 app.use('/queryFlees', querySuspectFleesRoute);
 app.use('./vehicles', vehiclesRoute)
 app.use('/anprCamera', anprCameraRoute);
-<<<<<<< HEAD
-app.use('/suspectProfile', suspectProfile);
-=======
-app.use('/suspectInfo', suspectProfile)
->>>>>>> 0f11f21b58b7f3e0df25d8abb4c27f947b5bf344
+app.use('/suspectProfile', suspectProfile)
 
 
 // //PASSPORT TRY 2
