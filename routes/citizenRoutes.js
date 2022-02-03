@@ -19,9 +19,6 @@ router.get('/person', async (req, res) => {
 });
 
 
-
-
-
 // const findAll = Citizen.findAll()
 //   .then(citizens => {
 //     console.log("citi: ", citizens)
