@@ -12,8 +12,12 @@ const {User} = require('../models/users.js');
 
 router.post('/login', passport.authenticate('local'),  async (req, res, next) => {
     console.log(req);  
+    if (typeof window !== 'undefined') {
+    localStorage.setItem("isAuthenticated", "true");
+    window.location.pathname = "/";
+    }
     // res.status(200);
-    res.redirect(200, '/home');    // this should redirect to home but doesnt!! why?!?            
+    res.redirect(200, '/home');    // this should redirect to home but doesnt!!            
     // res.send('Hello, you are now authenticated'); // this sends hello when authentication works! - so you can check in postman 
 })
 
