@@ -28,6 +28,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 // ROUTES
 app.use('/citizen', citizenRoutes);
 app.use('/peopleBankAccount', peopleBankAccountRoutes);
