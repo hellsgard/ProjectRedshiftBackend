@@ -3,7 +3,7 @@ const { QueryTypes } = require('sequelize');
 const sequelize = require('../utils/database.js');
 
 router.get('/basicInfo/:id', async (req,res) => {
-    console.log(req.query);
+    console.log(req.params);
     const info = await sequelize.query(
         `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
          pa.nationality, pa.placeOfBirth FROM citizen ci JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
