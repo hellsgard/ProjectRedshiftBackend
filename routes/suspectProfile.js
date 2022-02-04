@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { QueryTypes } = require('sequelize');
 const sequelize = require('../utils/database.js');
 
-router.get('/basicInfo/:id', async (req,res) => {
+router.get('/byID/', async (req,res) => {
     console.log(req.params);
     const info = await sequelize.query(
         `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
@@ -32,7 +32,7 @@ router.get('/basicInfo/:id', async (req,res) => {
     //    {replacements: [req.query.citizenID], type: QueryTypes.SELECT });
     //     console.log(whereabouts);
     
-    res.send({info})
+    res.status(200).send(info);
 });
 
 module.exports = router;
