@@ -95,9 +95,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-// app.get('/test', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-//     res.send('bloop');
-// })
 
 // app.get('/logout', function (req, res){ // for logging out - should this be in the userRoutes?
 //   req.session.destroy(function (err) {
@@ -107,18 +104,6 @@ app.use(function(err, req, res, next) {
 // });
 
 
-// PASSPORT
-// app.use(cookieParser());
-// const User = require('./models/users.js')
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-// const init = require('./passport-config.js');
-// const UserSchema = require('./models/users.js');
-
-// init(passport, username => {
-//   return UserSchema.find(user => user.username === username)
-// });
 
 // app.use(flash());
 // app.use(session({
