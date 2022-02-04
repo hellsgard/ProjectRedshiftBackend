@@ -25,9 +25,10 @@ router.get('/person', async (req, res) => {
 
 
 router.get('/byID/', async (req, res) => {
-    const suspectProfile = await sequelize.query(`SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
+    const suspectProfile = await sequelize.query(
+        `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
     pa.nationality, pa.placeOfBirth FROM citizen ci JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
-    AND pa.dob=ci.dateOfBirth WHERE ci.citizenID='${req.query.citizenID}'?`,
+    AND pa.dob=ci.dateOfBirth WHERE ci.citizenID LIKE '${req.query.citizenID}%'`,
         { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
 
     res.status(200).send(suspectProfile[0]);
