@@ -16,7 +16,7 @@ router.get('/byID/', async (req,res) => {
         FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
         JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId JOIN atmTransactions am ON ba.cardNumber=am.bankCardNumber
         JOIN atmpoint ap ON am.atmId=ap.atmId 
-        WHERE ci.citizenID LIKE 1111657921`,
+        WHERE ci.citizenID LIKE ?`,
         {replacements: [req.params.id], type: QueryTypes.SELECT });
         console.log(atmLoc);
 
