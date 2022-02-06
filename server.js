@@ -41,6 +41,7 @@ app.use('./vehicles', vehiclesRoute)
 app.use('/anprCamera', anprCameraRoute);
 app.use('/suspectProfile', suspectProfile)
 app.use('./basicInfo', suspectProfile);
+app.use('./associates', queryPersonRoute);
 
 
 // //PASSPORT TRY 2
