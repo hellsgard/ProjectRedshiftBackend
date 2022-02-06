@@ -12,6 +12,7 @@ const anprCameraRoute = require ('./routes/anprCameraRoute');
 const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const suspectProfile = require('./routes/suspectProfile.js');
+const mobileCallRoutes = require('./routes/mobileCallRoutes.js');
 const passport = require('passport');
 const flash = require('express-flash'); 
 const session = require('express-session'); 
@@ -42,6 +43,7 @@ app.use('./vehicles', vehiclesRoute)
 app.use('/anprCamera', anprCameraRoute);
 app.use('/suspectProfile', suspectProfile)
 app.use('./basicInfo', suspectProfile);
+app.use('./mobileCall', mobileCallRoutes);
 
 
 // //PASSPORT TRY 2
