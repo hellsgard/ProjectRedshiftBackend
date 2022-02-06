@@ -27,7 +27,7 @@ router.get('/byID/', async (req,res) => {
     //     {replacements: [req.query.citizenID], type: QueryTypes.SELECT });
     //     console.log(colleagues);
     
-    // all ATM transactions with location based on ID
+//     all ATM transactions with location based on ID
 //     SELECT ba.cardNumber, am.atmId, am.timestamp, am.amount, ap.operator, ap.streetName, ap.postcode, ap.latitude, ap.longitude
 // FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
 // JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId JOIN atmTransactions am ON ba.cardNumber=am.bankCardNumber
