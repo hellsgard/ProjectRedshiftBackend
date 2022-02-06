@@ -76,6 +76,17 @@ router.get('/byID/', async (req, res) => {
     console.log("fin");
 });
 
+router.get('/associates/'), async (req, res) => {
+    const suspectProfile = await sequelize.query(
+        `SELECT * FROM peoplebusinessaddress WHERE businessName IN (SELECT businessName FROM peoplebusinessaddress 
+            WHERE forenames= ? AND surname=? AND dateOfBirth=?)`,
+        { replacements: [req.query.forenames, req.query.surname, req.query.dateOfBirth], type: QueryTypes.SELECT });
+
+    res.status(200).send(suspectProfile[0]);
+    console.log(suspectProfile);
+    console.log("checking");
+};
+
 // file where we do the filtering 
 module.exports = router;
 
