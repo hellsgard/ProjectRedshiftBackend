@@ -50,31 +50,6 @@ router.get('/callRecordsOutbound', async (req, res, next) => {
 })
 
 
-
-
-// router.get('/mobile', async (req, res) => {
-//     const mobileInfo = await sequelize.query( `SELECT * FROM peoplemobile WHERE forenames='${req.query.forenames}' AND surname='smith';`,
-//         { replacements: [req.query.forenames], type: QueryTypes.SELECT });
-
-//     res.status(200).send(mobileInfo);
-//     console.log(mobileInfo);
-//     console.log(req.query.forenames);
-//     .catch((error) =>{
-//         next(error);
-//     });
-// })
-
-
-// router.get('/byID/', async (req, res) => {
-//     const suspectProfile = await sequelize.query(`SELECT * FROM citizen WHERE citizenID='${req.query.citizenID}'`,
-//         { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
-
-//     res.status(200).send(suspectProfile[0]);
-//     console.log(suspectProfile);
-//     console.log("fin");
-// })
-
-
 router.get('/byID/', async (req, res) => {
     const suspectProfile = await sequelize.query(
         `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
@@ -92,6 +67,21 @@ router.get('/associates/'), async (req, res) => {
         `SELECT * FROM peoplebusinessaddress WHERE businessName IN (SELECT businessName FROM peoplebusinessaddress 
             WHERE forenames= ? AND surname=? AND dateOfBirth=?)`,
         { replacements: [req.query.forenames, req.query.surname, req.query.dateOfBirth], type: QueryTypes.SELECT });
+
+    res.status(200).send(suspectProfile[0]);
+    console.log(suspectProfile);
+    console.log("checking");
+};
+
+router.get('/financialEpos/'), async (req, res) => {
+    const suspectProfile = await sequelize.query(
+        `SELECT ci.citizenID, pb.accountNumber, pb.bank, ba.cardNumber, et.eposId, et.timestamp, et.amount, ep.vendor, ep.latitude, ep.longitude
+        FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
+        JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId 
+        JOIN eposTransactions et ON ba.cardNumber=et.bankCardNumber
+        JOIN epos ep ON et.eposID=ep.id
+        WHERE ci.citizenID=?`,
+        { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
 
     res.status(200).send(suspectProfile[0]);
     console.log(suspectProfile);
