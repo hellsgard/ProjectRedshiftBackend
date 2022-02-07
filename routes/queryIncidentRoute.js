@@ -15,7 +15,7 @@ router.get('/incident', async(req, res) => {
  // file where we do the filtering 
 module.exports = router;
 
-// look into creating indexes for all of large tables 
+
 
 // for timeframes - upper and lower time bound boxes
 // have an audit database - under tighter restrictions than main database, this is where the auditing data goes.
