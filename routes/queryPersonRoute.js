@@ -28,8 +28,19 @@ router.get('/mobile', async(req, res, next) => {
 })
 
 router.get('/callRecords', async (req, res, next) => {
-    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords WHERE receiverMSISDN=? or callerMSISDN=?;`,
-         { replacements: [req.query.phoneNumber, req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
+    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.callerMSISDN=p.phoneNumber WHERE receiverMSISDN=?;`,
+         { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
+        console.log(result);
+        res.status(200).send(result);
+    })
+    .catch((error) => {
+        next(error);
+    });
+})
+
+router.get('/callRecordsOutbound', async (req, res, next) => {
+    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.receiverMSISDN=p.phoneNumber WHERE callerMSISDN='07700 790764';`,
+         { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
         console.log(result);
         res.status(200).send(result);
     })
