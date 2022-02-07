@@ -5,4 +5,4 @@ const sequelize = new Sequelize ('redshift', 'admin', 'Wireframe123!', {
     host: 'redshiftdev.cpd8frupo8ft.eu-west-2.rds.amazonaws.com',
 });
 
-module.exports = sequelize;
+module.exports = sequelize; 
