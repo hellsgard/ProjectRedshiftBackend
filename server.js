@@ -29,19 +29,19 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-app.use('/citizen', citizenRoutes);
-app.use('/peopleBankAccount', peopleBankAccountRoutes);
-app.use('/bankCard', bankCardRoutes);
+// app.use('/citizen', citizenRoutes);
+// app.use('/peopleBankAccount', peopleBankAccountRoutes);
+// app.use('/bankCard', bankCardRoutes);
 app.use('/atmTransactions', atmTransactionsRoute)
-app.use('/atmPoint', atmPointRoute);
+// app.use('/atmPoint', atmPointRoute);
 app.use('/queryPerson', queryPersonRoute);
 app.use('/queryIncident', queryIncidentRoute);
 app.use('/queryFlees', querySuspectFleesRoute);
-app.use('./vehicles', vehiclesRoute)
-app.use('/anprCamera', anprCameraRoute);
-app.use('/suspectProfile', suspectProfile)
-app.use('./basicInfo', suspectProfile);
-app.use('./associates', queryPersonRoute);
+// app.use('./vehicles', vehiclesRoute)
+// app.use('/anprCamera', anprCameraRoute);
+// app.use('/suspectProfile', suspectProfile)
+// app.use('./basicInfo', suspectProfile);
+// app.use('./associates', queryPersonRoute);
 
 
 // //PASSPORT TRY 2
