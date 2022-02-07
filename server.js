@@ -32,7 +32,7 @@ app.use(express.json());
 // app.use('/citizen', citizenRoutes);
 // app.use('/peopleBankAccount', peopleBankAccountRoutes);
 // app.use('/bankCard', bankCardRoutes);
-app.use('/atmTransactions', atmTransactionsRoute)
+// app.use('/atmTransactions', atmTransactionsRoute)
 // app.use('/atmPoint', atmPointRoute);
 app.use('/queryPerson', queryPersonRoute);
 app.use('/queryIncident', queryIncidentRoute);
