@@ -36,6 +36,5 @@ router.get('/associates/', async (req, res) => {
     console.log(assocData)
 })
 
-// file where we do the filtering 
 module.exports = router;
 
