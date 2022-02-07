@@ -11,7 +11,7 @@ describe('userRoute route tests', function(){
     // Arrange
     chai.request(server)
     // Act
-    .get('/users/readAll')
+    .get('/login')
     .end((err, res) => {
     if(err){
     done(err);            
