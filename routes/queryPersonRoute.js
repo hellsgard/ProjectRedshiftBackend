@@ -30,7 +30,7 @@ router.get('/mobile', async(req, res, next) => {
 router.get('/callRecords', async (req, res, next) => {
     const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.callerMSISDN=p.phoneNumber WHERE receiverMSISDN=?;`,
          { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
-        console.log(result);
+        // console.log(result);
         res.status(200).send(result);
     })
     .catch((error) => {
@@ -41,7 +41,7 @@ router.get('/callRecords', async (req, res, next) => {
 router.get('/callRecordsOutbound', async (req, res, next) => {
     const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.receiverMSISDN=p.phoneNumber WHERE callerMSISDN='07700 790764';`,
          { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
-        console.log(result);
+        // console.log(result);
         res.status(200).send(result);
     })
     .catch((error) => {
@@ -73,20 +73,25 @@ router.get('/associates/'), async (req, res) => {
     console.log("checking");
 };
 
-router.get('/financialEpos/'), async (req, res) => {
-    const suspectProfile = await sequelize.query(
+router.get('/financialEpos', async (req, res, next) => {
+    console.log("query starts");
+    const eposInfo = await sequelize.query(
         `SELECT ci.citizenID, pb.accountNumber, pb.bank, ba.cardNumber, et.eposId, et.timestamp, et.amount, ep.vendor, ep.latitude, ep.longitude
         FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
         JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId 
         JOIN eposTransactions et ON ba.cardNumber=et.bankCardNumber
         JOIN epos ep ON et.eposID=ep.id
-        WHERE ci.citizenID=?`,
-        { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
-
-    res.status(200).send(suspectProfile[0]);
-    console.log(suspectProfile);
-    console.log("checking");
-};
+        WHERE ci.citizenID=?;`,
+        { replacements: [req.query.citizenID], type: QueryTypes.SELECT }).then((result) => {
+            console.log("hello")
+            console.log(result);
+            console.log(req.query.citizenID);
+            res.status(200).send(result);
+        })
+        .catch((error) => {
+            next(error);
+        });
+    });
 
 // file where we do the filtering 
 module.exports = router;
