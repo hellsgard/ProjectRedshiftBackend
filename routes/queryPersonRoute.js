@@ -50,7 +50,7 @@ router.get('/callRecordsOutbound', async (req, res, next) => {
 })
 
 
-router.get('/byID/', async (req, res) => {
+router.get('/byID', async (req, res) => {
     const suspectProfile = await sequelize.query(
         `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
     pa.nationality, pa.placeOfBirth FROM citizen ci JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
@@ -62,7 +62,7 @@ router.get('/byID/', async (req, res) => {
     console.log("fin");
 });
 
-router.get('/associates/'), async (req, res) => {
+router.get('/associates'), async (req, res) => {
     const suspectProfile = await sequelize.query(
         `SELECT * FROM peoplebusinessaddress WHERE businessName IN (SELECT businessName FROM peoplebusinessaddress 
             WHERE forenames= ? AND surname=? AND dateOfBirth=?)`,
