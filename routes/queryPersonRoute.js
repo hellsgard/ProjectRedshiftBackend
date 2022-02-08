@@ -76,6 +76,21 @@ router.get('/associates'), async (req, res) => {
     console.log("checking");
 };
 
+router.get('/associatesHome/',async (req, res) => {
+    try{
+        const homeData = await sequelize.query(`SELECT * FROM citizen WHERE homeAddress IN (SELECT homeAddress FROM citizen 
+            WHERE forenames= '${req.query.forenames}' AND surname='${req.query.surname}' AND dateOfBirth='${req.query.dateOfBirth}')`, {
+            replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
+            type: QueryTypes.SELECT
+        });
+        res.status(200).send(homeData);
+    } catch (error) {
+        res.status(500).send(error, "associatesHome not working");
+    }
+    
+    console.log("home query run")
+}) 
+
 router.get('/financialEpos', async (req, res, next) => {
     console.log("query starts");
     const eposInfo = await sequelize.query(
