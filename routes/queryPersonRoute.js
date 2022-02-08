@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { QueryTypes } = require('sequelize');
 const sequelize = require('../utils/database.js');
+const passport = require('passport');
 
 
 
-router.get('/person', async (req, res) => {
+router.get('/person', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const suspect = await sequelize.query(`SELECT * FROM citizen WHERE surname LIKE '${req.query.surname}%' AND forenames LIKE '${req.query.forenames}%' 
         AND dateOfBirth LIKE '${req.query.dateOfBirth}%'`, {
         replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
@@ -55,7 +56,7 @@ router.get('/callRecordsOutbound', async (req, res, next) => {
 })
 
 
-router.get('/byID', async (req, res) => {
+router.get('/byID',  async (req, res) => {
     const suspectProfile = await sequelize.query(
         `SELECT * FROM citizen c JOIN peoplemobile m on c.homeAddress=m.address WHERE citizenID=?;`,
         { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
@@ -89,6 +90,7 @@ router.get('/financialEpos', async (req, res, next) => {
             console.log("hello")
             console.log(result);
             console.log(req.query.citizenID);
+            
             res.status(200).send(result);
         })
         .catch((error) => {

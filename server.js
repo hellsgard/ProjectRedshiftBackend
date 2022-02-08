@@ -62,9 +62,8 @@ const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy(function(username, password, done) {
   User.findOne({where: {username:username}}).then(user => {
-    if (password === user.password) return done(null, user);
-    // if (bcrypt.compare(password, user.password)) return done(null, user); // this isnt working yet - returns everything as ok
-      return done (null, false)
+    // if (password === user.password) return done(null, user);
+     if (bcrypt.compare(password, user.password)) return done(null, user); 
   })
   .catch(error => done(error, false)); // put in message here that says wrong
 })); 
@@ -84,7 +83,7 @@ opts.secretOrKey = 'Marmoset';
 opts.algorithms = ['HS256'];
 
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-  User.findById(jwt_payload.sub, function (err, user) {
+  User.findById(jwt_payload.sub, function (err, user) { // expiration occurs in the jwt payload
       console.log(err, user);
       if (err) {
           return done(err, false);
@@ -97,6 +96,12 @@ passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
       }
   });
 }));
+
+// // This should be the cookies middleware
+// app.get('/', function(req, res){
+//   req.cookies.rememberme;
+//   console.log("cookies");
+//   });
 
 app.use('/users', userRoute)
 

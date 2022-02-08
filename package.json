@@ -19,6 +19,7 @@
     "crypto": "^1.0.1",
     "express": "^4.17.2",
     "express-flash": "^0.0.2",
+    "express-passport-logout": "^0.1.0",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^9.2.0",
