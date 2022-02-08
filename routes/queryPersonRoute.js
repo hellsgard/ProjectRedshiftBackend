@@ -65,16 +65,38 @@ router.get('/byID', async (req, res) => {
     console.log("fin");
 });
 
-router.get('/associates'), async (req, res) => {
-    const suspectProfile = await sequelize.query(
-        `SELECT * FROM peoplebusinessaddress WHERE businessName IN (SELECT businessName FROM peoplebusinessaddress 
-            WHERE forenames= ? AND surname=? AND dateOfBirth=?)`,
-        { replacements: [req.query.forenames, req.query.surname, req.query.dateOfBirth], type: QueryTypes.SELECT });
+router.get('/associates/', async (req, res) => {
+    try{
+        const workData = await sequelize.query(`SELECT ci.citizenID, pb.forenames, pb.surname, pb.homeAddress, pb.dateOfBirth, pb.businessName, pb.businessAddress
+            FROM peoplebusinessaddress pb JOIN citizen ci ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
+        WHERE businessName IN (SELECT businessName FROM peoplebusinessaddress
+        WHERE forenames= '${req.query.forenames}' AND surname='${req.query.surname}' AND dateOfBirth='${req.query.dateOfBirth}')`, {
+        replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
+        type: QueryTypes.SELECT
+    });
+    res.status(200).send(workData);
+    }
+    catch (error){
+        res.status(500).send(error, "associates not working");
+    }
+    
+    console.log("work query run")
+});
 
-    res.status(200).send(suspectProfile[0]);
-    console.log(suspectProfile);
-    console.log("checking");
-};
+router.get('/associatesHome/',async (req, res) => {
+    try{
+        const homeData = await sequelize.query(`SELECT * FROM citizen WHERE homeAddress IN (SELECT homeAddress FROM citizen 
+            WHERE forenames= '${req.query.forenames}' AND surname='${req.query.surname}' AND dateOfBirth='${req.query.dateOfBirth}')`, {
+            replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
+            type: QueryTypes.SELECT
+        });
+        res.status(200).send(homeData);
+    } catch (error) {
+        res.status(500).send(error, "associatesHome not working");
+    }
+    
+    console.log("home query run")
+}) 
 
 router.get('/financialEpos', async (req, res, next) => {
     console.log("query starts");
