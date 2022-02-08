@@ -6,7 +6,7 @@ router.get('/byID/', async (req,res) => {
     const info = await sequelize.query(
         `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
          pa.nationality, pa.placeOfBirth FROM citizen ci JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
-         AND pa.dob=ci.dateOfBirth WHERE ci.citizenID LIKE ?`,
+         AND pa.dob=ci.dateOfBirth WHERE ci.citizenID= ?`,
         {replacements: [req.params.id], type: QueryTypes.SELECT });
         console.log(info);
 
