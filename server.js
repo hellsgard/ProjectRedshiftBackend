@@ -50,9 +50,9 @@ app.use('/mapData', mapDataRoute);
 
 // //PASSPORT TRY 2
 app.use(logger('dev'));
+app.use(session);
 app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(session);
+app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

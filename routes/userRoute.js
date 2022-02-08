@@ -13,19 +13,9 @@ const logout = require('express-passport-logout');
 const {User} = require('../models/users.js');
 
 router.post('/login', passport.authenticate('local'),  async (req, res, next) => {
-    console.log(req);  
-    // const token = jwt.sign(req.user.toJSON(), 'marmoset', {expiresIn: '30m'});
-    // console.log(token); // this is the token
-    // console.log("I AM HERE!!!!")
-    
-    // if (typeof window !== 'undefined') {
-    // localStorage.setItem("isAuthenticated", "true");
-    // window.location.pathname = "/";
-    // }
-    // res.cookie('rememberme', 'yes', { expires: new Date(Date.now() + 900000), httpOnly: true }); // hopefully this is the cookies for remembering // 15 mins
-    // res.status(200);
-    // res.send({token}).redirect(200, '/home');
-    res.redirect(200, '/home');           
+    const token = jwt.sign({sub: req.user.id}, 'Marmoset', {algorithm: 'HS256'});
+    res.send(token);
+    // res.redirect(200, '/home');           
     
 })
 

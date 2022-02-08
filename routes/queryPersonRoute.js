@@ -19,7 +19,7 @@ router.get('/person', async (req, res) => { //  passport.authenticate('jwt', { s
     const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
     console.log(date);
     console.log(req.query.user);
-    await sequelize.query(`INSERT INTO audit (time, user, query) VALUES ('${date}', '${req.query.user}', '${forAudit}')`)
+    await sequelize.query(`INSERT INTO audit (time, user, query) VALUES ('${date}', '${req.user}', '${forAudit}')`)
     res.status(200).send(suspect);
     } 
     catch (error) {
