@@ -13,6 +13,7 @@ const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const mapDataRoute = require('./routes/mapDataRoute.js');
 const mapDataAtmRoute = require('./routes/mapDataAtmRoute.js');
+const mapDataAnprRoute = require('./routes/mapDataAnprRoute.js');
 const suspectProfile = require('./routes/suspectProfile.js');
 const mobileCallRoutes = require('./routes/mobileCallRoutes.js');
 const passport = require('passport');
@@ -43,6 +44,7 @@ app.use('/queryIncident', queryIncidentRoute);
 app.use('/queryFlees', querySuspectFleesRoute);
 app.use('/mapData', mapDataRoute);
 app.use('/mapDataAtm', mapDataAtmRoute);
+app.use('/mapDataAnpr', mapDataAnprRoute);
 // app.use('./vehicles', vehiclesRoute)
 // app.use('/anprCamera', anprCameraRoute);
 // app.use('/suspectProfile', suspectProfile)
