@@ -19,6 +19,7 @@ router.get('/person', async (req, res) => {
 router.get('/mobile', async(req, res, next) => {
     const mobileInfo = await sequelize.query( `SELECT * FROM peoplemobile WHERE forenames=? AND surname=? AND dateOfBirth=?;`,
          { replacements: [req.query.forenames, req.query.surname, req.query.dateOfBirth], type: QueryTypes.SELECT }).then((mobileInfo) => {
+        console.log("moile")
         console.log(mobileInfo);
         res.status(200).send(mobileInfo);
     })
@@ -28,9 +29,10 @@ router.get('/mobile', async(req, res, next) => {
 })
 
 router.get('/callRecords', async (req, res, next) => {
+    console.log("call records inbound started");
     const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.callerMSISDN=p.phoneNumber WHERE receiverMSISDN=?;`,
          { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
-        console.log(result);
+        console.log("call records inbound finished");
         res.status(200).send(result);
     })
     .catch((error) => {
@@ -39,9 +41,10 @@ router.get('/callRecords', async (req, res, next) => {
 })
 
 router.get('/callRecordsOutbound', async (req, res, next) => {
-    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.receiverMSISDN=p.phoneNumber WHERE callerMSISDN='07700 790764';`,
+    console.log("call records outbound started");
+    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.receiverMSISDN=p.phoneNumber WHERE callerMSISDN=?;`,
          { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
-        console.log(result);
+        console.log("call records outbound finished");
         res.status(200).send(result);
     })
     .catch((error) => {
@@ -52,9 +55,7 @@ router.get('/callRecordsOutbound', async (req, res, next) => {
 
 router.get('/byID/', async (req, res) => {
     const suspectProfile = await sequelize.query(
-        `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
-    pa.nationality, pa.placeOfBirth FROM citizen ci JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
-    AND pa.dob=ci.dateOfBirth WHERE ci.citizenID LIKE '${req.query.citizenID}%'`,
+        `SELECT * FROM citizen c JOIN peoplemobile m on c.homeAddress=m.address WHERE citizenID=?;`,
         { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
 
     res.status(200).send(suspectProfile[0]);
@@ -62,7 +63,7 @@ router.get('/byID/', async (req, res) => {
     console.log("fin");
 });
 
-router.get('/associates/'), async (req, res) => {
+router.get('/associates'), async (req, res) => {
     const suspectProfile = await sequelize.query(
         `SELECT * FROM peoplebusinessaddress WHERE businessName IN (SELECT businessName FROM peoplebusinessaddress 
             WHERE forenames= ? AND surname=? AND dateOfBirth=?)`,
