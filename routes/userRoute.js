@@ -9,14 +9,14 @@ const logout = require('express-passport-logout');
 
 
 
+
 // import in the model - will need to use models for the passport validation
 const {User} = require('../models/users.js');
 
 router.post('/login', passport.authenticate('local'),  async (req, res, next) => {
     const token = jwt.sign({sub: req.user.id}, 'Marmoset', {algorithm: 'HS256'});
-    res.send(token);
-    // res.redirect(200, '/home');           
     
+    res.send(token);          
 })
 
 router.delete('/logout', async (req, res, next) => {
