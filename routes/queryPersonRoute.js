@@ -3,17 +3,29 @@ const router = express.Router();
 const { QueryTypes } = require('sequelize');
 const sequelize = require('../utils/database.js');
 const passport = require('passport');
+const { ExtractJwt } = require('passport-jwt');
 
 
 
-router.get('/person', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/person', async (req, res) => { //  passport.authenticate('jwt', { session: false }),
+    try {
+    const forAudit = `SELECT * FROM citizen WHERE surname LIKE ${req.query.surname}% AND forenames LIKE ${req.query.forenames}% 
+    AND dateOfBirth LIKE ${req.query.dateOfBirth}%`;
     const suspect = await sequelize.query(`SELECT * FROM citizen WHERE surname LIKE '${req.query.surname}%' AND forenames LIKE '${req.query.forenames}%' 
         AND dateOfBirth LIKE '${req.query.dateOfBirth}%'`, {
-        replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
+        // replacements: [req.query.surname, req.query.forenames, req.query.dateOfBirth],
         type: QueryTypes.SELECT
-    });
+    }); 
+    const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log(date);
+    console.log(req.query.user);
+    await sequelize.query(`INSERT INTO audit (time, user, query) VALUES ('${date}', '${req.query.user}', '${forAudit}')`)
     res.status(200).send(suspect);
-})
+    } 
+    catch (error) {
+    console.error(error);
+};})
+
 
 
 
@@ -90,7 +102,6 @@ router.get('/financialEpos', async (req, res, next) => {
             console.log("hello")
             console.log(result);
             console.log(req.query.citizenID);
-            
             res.status(200).send(result);
         })
         .catch((error) => {
