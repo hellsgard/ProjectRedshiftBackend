@@ -16,42 +16,42 @@ router.get('/person', async (req, res) => {
 
 
 
-router.get('/mobile', async(req, res, next) => {
-    const mobileInfo = await sequelize.query( `SELECT * FROM peoplemobile WHERE forenames=? AND surname=? AND dateOfBirth=?;`,
-         { replacements: [req.query.forenames, req.query.surname, req.query.dateOfBirth], type: QueryTypes.SELECT }).then((mobileInfo) => {
-        console.log("moile")
-        console.log(mobileInfo);
-        res.status(200).send(mobileInfo);
-    })
-    .catch((error) => {
-        next(error);
-    });
+router.get('/mobile', async (req, res, next) => {
+    const mobileInfo = await sequelize.query(`SELECT * FROM peoplemobile WHERE forenames=? AND surname=? AND dateOfBirth=?;`,
+        { replacements: [req.query.forenames, req.query.surname, req.query.dateOfBirth], type: QueryTypes.SELECT }).then((mobileInfo) => {
+            console.log("moile")
+            console.log(mobileInfo);
+            res.status(200).send(mobileInfo);
+        })
+        .catch((error) => {
+            next(error);
+        });
 })
 
 router.get('/callRecords', async (req, res, next) => {
     console.log("call records inbound started");
-    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.callerMSISDN=p.phoneNumber WHERE receiverMSISDN=?;`,
+    const callRecords = await sequelize.query(`SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.callerMSISDN=p.phoneNumber WHERE receiverMSISDN=?;`,
         { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
-        console.log("call records inbound finished");
-        // console.log(result);
-        res.status(200).send(result);
-    })
-    .catch((error) => {
-        next(error);
-    });
+            console.log("call records inbound finished");
+            // console.log(result);
+            res.status(200).send(result);
+        })
+        .catch((error) => {
+            next(error);
+        });
 })
 
 router.get('/callRecordsOutbound', async (req, res, next) => {
     console.log("call records outbound started");
-    const callRecords = await sequelize.query( `SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.receiverMSISDN=p.phoneNumber WHERE callerMSISDN=?;`,
-         { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
-        console.log("call records outbound finished");
-        // console.log(result);
-        res.status(200).send(result);
-    })
-    .catch((error) => {
-        next(error);
-    });
+    const callRecords = await sequelize.query(`SELECT * FROM mobileCallRecords r JOIN peoplemobile p ON r.receiverMSISDN=p.phoneNumber WHERE callerMSISDN=?;`,
+        { replacements: [req.query.phoneNumber], type: QueryTypes.SELECT }).then((result) => {
+            console.log("call records outbound finished");
+            // console.log(result);
+            res.status(200).send(result);
+        })
+        .catch((error) => {
+            next(error);
+        });
 })
 
 
@@ -94,7 +94,26 @@ router.get('/financialEpos', async (req, res, next) => {
         .catch((error) => {
             next(error);
         });
-    });
+});
+
+router.get('/anpr', async (req, res, next) => {
+    console.log("query starts");
+    const eposInfo = await sequelize.query(
+        `SELECT ac.latitude, ac.longitude, ac.streetName, vo.vehicleRegistrationNumber, vr.make, vr.model, vr.colour, vr.driverLicenceID, vo.timestamp
+    FROM citizen ci JOIN vehicleRegistration vr ON vr.forenames=ci.forenames AND vr.surname=ci.surname AND vr.dateOfBirth=ci.dateOfBirth
+    JOIN vehicleObservations vo ON vr.vehicleRegistrationNo= vo.vehicleRegistrationNumber
+    JOIN anprcamera ac ON vo.ANPRPointId= ac.anprId
+    WHERE ci.citizenID = ?;`,
+        { replacements: [req.query.citizenID], type: QueryTypes.SELECT }).then((result) => {
+            console.log("is anpr stuff working?")
+            console.log(result);
+            console.log(req.query.citizenID);
+            res.status(200).send(result);
+        })
+        .catch((error) => {
+            next(error);
+        });
+});
 
 // file where we do the filtering 
 module.exports = router;
