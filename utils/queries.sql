@@ -16,7 +16,9 @@ WHERE forenames= 'Aimee' AND surname='Spence' AND dateOfBirth='1983-07-24');
 
 Find everyone at the same home address (lives with):
 
-SELECT * FROM citizen WHERE homeAddress IN (SELECT homeAddress FROM citizen WHERE ci.citizenID LIKE ?)`
+SELECT * FROM citizen WHERE homeAddress IN (SELECT homeAddress FROM citizen WHERE ci.citizenID LIKE ?)
+
+
 
 --  all epos transactions and locations based on ID
 
@@ -53,6 +55,19 @@ JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId
 JOIN atmTransactions am ON ba.cardNumber=am.bankCardNumber
 JOIN atmpoint ap ON am.atmId=ap.atmId 
 WHERE ci.citizenID LIKE 1111657921;
+
+# enhanced citizenID query which also returns mobile nummber
+SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, pm.phoneNumber, ci.dateOfBirth, 
+ci.sex, pa.passportNumber, pa.nationality, pa.placeOfBirth 
+FROM peoplemobile pm 
+JOIN citizen ci ON pm.forenames=ci.forenames AND pm.surname=ci.surname AND pm.dateOfBirth=ci.dateOfBirth 
+JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname AND pa.dob=ci.dateOfBirth
+WHERE ci.citizenID = '4113189892';
+
+
+
+
+
 
 
 
