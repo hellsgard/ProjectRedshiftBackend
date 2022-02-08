@@ -6,7 +6,8 @@ const sequelize = require('../utils/database.js');
 
 
 router.get('/person', async (req, res) => {
-    const suspect = await sequelize.query(`SELECT citizen.citizenID, citizen.forenames, citizen.surname, citizen.homeAddress, citizen.dateOfBirth, citizen.placeOfBirth ,peoplemobile.phoneNumber 
+    try{
+        const suspect = await sequelize.query(`SELECT citizen.citizenID, citizen.forenames, citizen.surname, citizen.homeAddress, citizen.dateOfBirth, citizen.placeOfBirth ,peoplemobile.phoneNumber 
     FROM citizen 
     LEFT JOIN peoplemobile ON citizen.surname=peoplemobile.surname AND citizen.forenames=peoplemobile.forenames AND citizen.dateOfBirth=peoplemobile.dateOfBirth
     WHERE citizen.surname LIKE '${req.query.surname}%' AND citizen.forenames LIKE '${req.query.forenames}%' 
@@ -15,19 +16,30 @@ router.get('/person', async (req, res) => {
         type: QueryTypes.SELECT
     });
     res.status(200).send(suspect);
+    }
+    catch (error) {
+        res.status(500).send(error, "get person not working");
+    }
+    
 })
 
 router.get('/byID/', async (req, res) => {
-    const suspectProfile = await sequelize.query(
-        `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
-         pa.nationality, pa.placeOfBirth, pm.phoneNumber
-         FROM citizen ci 
-         JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
-         LEFT JOIN peoplemobile pm ON pm.forenames=ci.forenames AND pm.surname=ci.surname AND pm.dateOfBirth=ci.dateOfBirth
-         AND pa.dob=ci.dateOfBirth WHERE ci.citizenID LIKE '${req.query.citizenID}%'`,
-        { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
-
-    res.status(200).send(suspectProfile[0]);
+    try{
+        const suspectProfile = await sequelize.query(
+            `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, ci.dateOfBirth, ci.sex, pa.passportNumber,
+             pa.nationality, pa.placeOfBirth, pm.phoneNumber
+             FROM citizen ci 
+             JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname 
+             LEFT JOIN peoplemobile pm ON pm.forenames=ci.forenames AND pm.surname=ci.surname AND pm.dateOfBirth=ci.dateOfBirth
+             AND pa.dob=ci.dateOfBirth WHERE ci.citizenID LIKE '${req.query.citizenID}%'`,
+            { replacements: [req.query.citizenID], type: QueryTypes.SELECT });
+    
+        res.status(200).send(suspectProfile[0]);
+    }
+    catch (error) {
+        res.status(500).send(error, "get by ID not working");
+    }
+    
     console.log(suspectProfile);
     console.log("fin");
 })
