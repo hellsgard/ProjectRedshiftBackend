@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const userRoute = require ('./routes/userRoute');
-const queryPersonRoute = require('./routes/queryPersonRoute');
 const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
+const queryPersonRoute = require('./routes/queryPersonRoute');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const mapDataRoute = require('./routes/mapDataRoute.js');
 const passport = require('passport');
@@ -19,11 +19,13 @@ app.use(express.json());
 
 
 // ROUTES
+
 app.use('/queryPerson', passport.authenticate('jwt'), queryPersonRoute); // means everything has to be authenticated
-app.use('/queryIncident', queryIncidentRoute);
-app.use('/queryFlees', querySuspectFleesRoute);
-app.use('/mapData', mapDataRoute);
-app.use('/users', userRoute)
+app.use('/queryIncident', passport.authenticate('jwt'), queryIncidentRoute);
+app.use('/queryFlees', passport.authenticate('jwt'), querySuspectFleesRoute);
+app.use('/mapData', passport.authenticate('jwt'), mapDataRoute);
+app.use('/users', passport.authenticate('jwt'), userRoute)
+
 
 
 // //PASSPORT TRY 2
