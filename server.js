@@ -24,7 +24,7 @@ app.use('/queryPerson', passport.authenticate('jwt'), queryPersonRoute); // mean
 app.use('/queryIncident', passport.authenticate('jwt'), queryIncidentRoute);
 app.use('/queryFlees', passport.authenticate('jwt'), querySuspectFleesRoute);
 app.use('/mapData', passport.authenticate('jwt'), mapDataRoute);
-app.use('/users', passport.authenticate('jwt'), userRoute)
+app.use('/users', userRoute)
 
 
 
