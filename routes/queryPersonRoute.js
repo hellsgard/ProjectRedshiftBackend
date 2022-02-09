@@ -76,7 +76,7 @@ router.get('/associates'), async (req, res) => {
     console.log("checking");
 };
 
-router.get('/financialEpos', async (req, res, next) => {
+router.get('/eposData', async (req, res, next) => {
     console.log("query starts");
     const eposInfo = await sequelize.query(
         `SELECT ci.citizenID, pb.accountNumber, pb.bank, ba.cardNumber, et.eposId, et.timestamp, et.amount, ep.vendor, ep.latitude, ep.longitude
@@ -92,6 +92,26 @@ router.get('/financialEpos', async (req, res, next) => {
             res.status(200).send(result);
         })
         .catch((error) => {
+            next(error);
+        });
+});
+
+router.get('/atmData', async (req, res, next) => {
+    console.log("query starts");
+    const atmPoint = await sequelize.query(
+        `SELECT ba.cardNumber, am.atmId, am.timestamp, am.amount, ap.operator, ap.streetName, ap.postcode, ap.latitude, ap.longitude
+        FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
+        JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId
+        JOIN atmTransactions am ON ba.cardNumber=am.bankCardNumber
+        JOIN atmpoint ap ON am.atmId=ap.atmId
+        WHERE ci.citizenID=?;`,
+        { replacements: [req.query.citizenID], type: QueryTypes.SELECT }).then((result) => {
+            console.log("hello")
+            console.log(result);
+            res.status(200).send(result);
+        })
+        .catch((error) => {
+            console.log('Error is',error)
             next(error);
         });
 });
