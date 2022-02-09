@@ -162,25 +162,25 @@ describe('queryPerson route tests', function(){
             done(err);            
             }
             // Assert
-            const callRecordsOutboundBody = res.body;
+            const byIdBody = res.body;
             expect(res).to.have.status(200);
-            expect(callRecordsOutboundBody).to.not.be.null;
-            callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-            expect(queryCallRecordOutboundRoute).to.contain.keys('citizenID');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('forenames');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('surname');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('homeAddress');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('dateOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('placeOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('sex');
+            expect(byIdBody).to.not.be.null;
+            byIdBody.map((querybyIdBodyRoute) => {
+            expect(querybyIdBodyRoute).to.contain.keys('citizenID');
+            expect(querybyIdBodyRoute).to.contain.keys('forenames');
+            expect(querybyIdBodyRoute).to.contain.keys('surname');
+            expect(querybyIdBodyRoute).to.contain.keys('homeAddress');
+            expect(querybyIdBodyRoute).to.contain.keys('dateOfBirth');
+            expect(querybyIdBodyRoute).to.contain.keys('placeOfBirth');
+            expect(querybyIdBodyRoute).to.contain.keys('sex');
 
-            expect(queryCallRecordOutboundRoute.citizenID).to.be.a(BigInt);
-            expect(queryCallRecordOutboundRoute.forenames).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.surname).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.homeAddress).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.dateOfBirth).to.be.a(date);
-            expect(queryCallRecordOutboundRoute.placeOfBirth).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.sex).to.be.a('string');
+            expect(querybyIdBodyRoute.citizenID).to.be.a(BigInt);
+            expect(querybyIdBodyRoute.forenames).to.be.a('string');
+            expect(querybyIdBodyRoute.surname).to.be.a('string');
+            expect(querybyIdBodyRoute.homeAddress).to.be.a('string');
+            expect(querybyIdBodyRoute.dateOfBirth).to.be.a(date);
+            expect(querybyIdBodyRoute.placeOfBirth).to.be.a('string');
+            expect(querybyIdBodyRoute.sex).to.be.a('string');
             })
             done();
             })
@@ -197,25 +197,25 @@ describe('queryPerson route tests', function(){
             done(err);            
             }
             // Assert
-            const callRecordsOutboundBody = res.body;
+            const associatesBody = res.body;
             expect(res).to.have.status(200);
-            expect(callRecordsOutboundBody).to.not.be.null;
-            callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-            expect(queryCallRecordOutboundRoute).to.contain.keys('citizenID');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('forenames');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('surname');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('homeAddress');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('dateOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('placeOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('sex');
+            expect(associatesBody).to.not.be.null;
+            associatesBody.map((queryAssociatesBodyRoute) => {
+            expect(queryAssociatesBodyRoute).to.contain.keys('citizenID');
+            expect(queryAssociatesBodyRoute).to.contain.keys('forenames');
+            expect(queryAssociatesBodyRoute).to.contain.keys('surname');
+            expect(queryAssociatesBodyRoute).to.contain.keys('homeAddress');
+            expect(queryAssociatesBodyRoute).to.contain.keys('dateOfBirth');
+            expect(queryAssociatesBodyRoute).to.contain.keys('placeOfBirth');
+            expect(queryAssociatesBodyRoute).to.contain.keys('sex');
 
-            expect(queryCallRecordOutboundRoute.citizenID).to.be.a(BigInt);
-            expect(queryCallRecordOutboundRoute.forenames).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.surname).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.homeAddress).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.dateOfBirth).to.be.a(date);
-            expect(queryCallRecordOutboundRoute.placeOfBirth).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.sex).to.be.a('string');
+            expect(queryAssociatesBodyRoute.citizenID).to.be.a(BigInt);
+            expect(queryAssociatesBodyRoute.forenames).to.be.a('string');
+            expect(queryAssociatesBodyRoute.surname).to.be.a('string');
+            expect(queryAssociatesBodyRoute.homeAddress).to.be.a('string');
+            expect(queryAssociatesBodyRoute.dateOfBirth).to.be.a(date);
+            expect(queryAssociatesBodyRoute.placeOfBirth).to.be.a('string');
+            expect(queryAssociatesBodyRoute.sex).to.be.a('string');
             })
             done();
             })
@@ -231,25 +231,25 @@ describe('queryPerson route tests', function(){
             done(err);            
             }
             // Assert
-            const callRecordsOutboundBody = res.body;
+            const associatesHomeBody = res.body;
             expect(res).to.have.status(200);
-            expect(callRecordsOutboundBody).to.not.be.null;
-            callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-            expect(queryCallRecordOutboundRoute).to.contain.keys('citizenID');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('forenames');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('surname');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('homeAddress');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('dateOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('placeOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('sex');
+            expect(associatesHomeBody).to.not.be.null;
+            associatesHomeBody.map((queryAssociatesHomeBodyRoute) => {
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('citizenID');
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('forenames');
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('surname');
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('homeAddress');
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('dateOfBirth');
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('placeOfBirth');
+            expect(queryAssociatesHomeBodyRoute).to.contain.keys('sex');
 
-            expect(queryCallRecordOutboundRoute.citizenID).to.be.a(BigInt);
-            expect(queryCallRecordOutboundRoute.forenames).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.surname).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.homeAddress).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.dateOfBirth).to.be.a(date);
-            expect(queryCallRecordOutboundRoute.placeOfBirth).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.sex).to.be.a('string');
+            expect(queryAssociatesHomeBodyRoute.citizenID).to.be.a(BigInt);
+            expect(queryAssociatesHomeBodyRoute.forenames).to.be.a('string');
+            expect(queryAssociatesHomeBodyRoute.surname).to.be.a('string');
+            expect(queryAssociatesHomeBodyRoute.homeAddress).to.be.a('string');
+            expect(queryAssociatesHomeBodyRoute.dateOfBirth).to.be.a(date);
+            expect(queryAssociatesHomeBodyRoute.placeOfBirth).to.be.a('string');
+            expect(queryAssociatesHomeBodyRoute.sex).to.be.a('string');
             })
             done();
             })
@@ -266,45 +266,45 @@ describe('queryPerson route tests', function(){
             done(err);            
             }
             // Assert
-            const callRecordsOutboundBody = res.body;
+            const eposDataBody = res.body;
             expect(res).to.have.status(200);
-            expect(callRecordsOutboundBody).to.not.be.null;
-            callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-            expect(queryCallRecordOutboundRoute).to.contain.keys('citizenID');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('forenames');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('surname');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('homeAddress');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('dateOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('placeOfBirth');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('sex');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('accountNumber');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('bank');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('cardNumber');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('eposId');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('timestamp');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('amount');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('vendor');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('latitude');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('longitude');
+            expect(eposDataBody).to.not.be.null;
+            eposDataBody.map((queryEposDataRoute) => {
+            expect(queryEposDataRoute).to.contain.keys('citizenID');
+            expect(queryEposDataRoute).to.contain.keys('forenames');
+            expect(queryEposDataRoute).to.contain.keys('surname');
+            expect(queryEposDataRoute).to.contain.keys('homeAddress');
+            expect(queryEposDataRoute).to.contain.keys('dateOfBirth');
+            expect(queryEposDataRoute).to.contain.keys('placeOfBirth');
+            expect(queryEposDataRoute).to.contain.keys('sex');
+            expect(queryEposDataRoute).to.contain.keys('accountNumber');
+            expect(queryEposDataRoute).to.contain.keys('bank');
+            expect(queryEposDataRoute).to.contain.keys('cardNumber');
+            expect(queryEposDataRoute).to.contain.keys('eposId');
+            expect(queryEposDataRoute).to.contain.keys('timestamp');
+            expect(queryEposDataRoute).to.contain.keys('amount');
+            expect(queryEposDataRoute).to.contain.keys('vendor');
+            expect(queryEposDataRoute).to.contain.keys('latitude');
+            expect(queryEposDataRoute).to.contain.keys('longitude');
 
 
-            expect(queryCallRecordOutboundRoute.citizenID).to.be.a(BigInt);
-            expect(queryCallRecordOutboundRoute.forenames).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.surname).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.homeAddress).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.dateOfBirth).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.placeOfBirth).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.sex).to.be.a('string');
+            // expect(queryEposDataRoute.citizenID).to.be.a(BigInt);
+            // expect(queryEposDataRoute.forenames).to.be.a('string');
+            // expect(queryEposDataRoute.surname).to.be.a('string');
+            // expect(queryEposDataRoute.homeAddress).to.be.a('string');
+            // expect(queryEposDataRoute.dateOfBirth).to.be.a('string');
+            // expect(queryEposDataRoute.placeOfBirth).to.be.a('string');
+            // expect(queryEposDataRoute.sex).to.be.a('string');
 
-            expect(queryCallRecordOutboundRoute.accountNumber).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.bank).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.cardNumber).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.eposId).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.timestamp).to.be.a(date);
-            expect(queryCallRecordOutboundRoute.amount).to.be.a(DOUBLE);
-            expect(queryCallRecordOutboundRoute.vendor).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.latitude).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.longitude).to.be.a('string');
+            expect(queryEposDataRoute.accountNumber).to.be.a('string');
+            expect(queryEposDataRoute.bank).to.be.a('string');
+            expect(queryEposDataRoute.cardNumber).to.be.a('string');
+            expect(queryEposDataRoute.eposId).to.be.a('string');
+            expect(queryEposDataRoute.timestamp).to.be.a(date);
+            expect(queryEposDataRoute.amount).to.be.a(DOUBLE);
+            expect(queryEposDataRoute.vendor).to.be.a('string');
+            expect(queryEposDataRoute.latitude).to.be.a('string');
+            expect(queryEposDataRoute.longitude).to.be.a('string');
 
             })
             done();
@@ -322,27 +322,27 @@ describe('queryPerson route tests', function(){
             done(err);            
             }
             // Assert
-            const callRecordsOutboundBody = res.body;
+            const atmDataBody = res.body;
             expect(res).to.have.status(200);
-            expect(callRecordsOutboundBody).to.not.be.null;
-            callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-            expect(queryCallRecordOutboundRoute).to.contain.keys('cardNumber');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('atmId');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('timestamp');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('operator');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('streetName');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('postcode');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('latitude');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('longitude');
+            expect(atmDataBody).to.not.be.null;
+            atmDataBody.map((queryAtmDataRoute) => {
+            expect(queryAtmDataRoute).to.contain.keys('cardNumber');
+            expect(queryAtmDataRoute).to.contain.keys('atmId');
+            expect(queryAtmDataRoute).to.contain.keys('timestamp');
+            expect(queryAtmDataRoute).to.contain.keys('operator');
+            expect(queryAtmDataRoute).to.contain.keys('streetName');
+            expect(queryAtmDataRoute).to.contain.keys('postcode');
+            expect(queryAtmDataRoute).to.contain.keys('latitude');
+            expect(queryAtmDataRoute).to.contain.keys('longitude');
 
-            expect(queryCallRecordOutboundRoute.cardNumber).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.atmId).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.timestamp).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.operator).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.streetName).to.be.a(date);
-            expect(queryCallRecordOutboundRoute.postcode).to.be.a(DOUBLE);
-            expect(queryCallRecordOutboundRoute.latitude).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.longitude).to.be.a('string');
+            expect(queryAtmDataRoute.cardNumber).to.be.a('string');
+            expect(queryAtmDataRoute.atmId).to.be.a('string');
+            expect(queryAtmDataRoute.timestamp).to.be.a('string');
+            expect(queryAtmDataRoute.operator).to.be.a('string');
+            expect(queryAtmDataRoute.streetName).to.be.a(date);
+            expect(queryAtmDataRoute.postcode).to.be.a(DOUBLE);
+            expect(queryAtmDataRoute.latitude).to.be.a('string');
+            expect(queryAtmDataRoute.longitude).to.be.a('string');
             })
             done();
             })
@@ -359,29 +359,29 @@ describe('queryPerson route tests', function(){
             done(err);            
             }
             // Assert
-            const callRecordsOutboundBody = res.body;
+            const AnprBody = res.body;
             expect(res).to.have.status(200);
-            expect(callRecordsOutboundBody).to.not.be.null;
-            callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-            expect(queryCallRecordOutboundRoute).to.contain.keys('latitude');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('longitude');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('streetName');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('vehicleRegistrationNumber');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('make');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('model');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('colour');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('driverLicenceID');
-            expect(queryCallRecordOutboundRoute).to.contain.keys('timestamp');
+            expect(AnprBody).to.not.be.null;
+            AnprBody.map((AnprRoute) => {
+            expect(AnprRoute).to.contain.keys('latitude');
+            expect(AnprRoute).to.contain.keys('longitude');
+            expect(AnprRoute).to.contain.keys('streetName');
+            expect(AnprRoute).to.contain.keys('vehicleRegistrationNumber');
+            expect(AnprRoute).to.contain.keys('make');
+            expect(AnprRoute).to.contain.keys('model');
+            expect(AnprRoute).to.contain.keys('colour');
+            expect(AnprRoute).to.contain.keys('driverLicenceID');
+            expect(AnprRoute).to.contain.keys('timestamp');
 
-            expect(queryCallRecordOutboundRoute.latitude).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.longitude).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.streetName).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.vehicleRegistrationNumber).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.make).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.model).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.colour).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.driverLicenceID).to.be.a('string');
-            expect(queryCallRecordOutboundRoute.timestamp).to.be.a('string');
+            expect(AnprRoute.latitude).to.be.a('string');
+            expect(AnprRoute.longitude).to.be.a('string');
+            expect(AnprRoute.streetName).to.be.a('string');
+            expect(AnprRoute.vehicleRegistrationNumber).to.be.a('string');
+            expect(AnprRoute.make).to.be.a('string');
+            expect(AnprRoute.model).to.be.a('string');
+            expect(AnprRoute.colour).to.be.a('string');
+            expect(AnprRoute.driverLicenceID).to.be.a('string');
+            expect(AnprRoute.timestamp).to.be.a('string');
             })
             done();
             })
