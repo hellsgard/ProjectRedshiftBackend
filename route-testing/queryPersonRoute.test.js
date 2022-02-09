@@ -8,7 +8,8 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 describe('queryPerson route tests', function(){
-    
+    this.timeout(60000) // Test timeout. Gives queries enough time to run.
+
     let token;
     let testPerson = {
         surname: "smith",
@@ -16,52 +17,53 @@ describe('queryPerson route tests', function(){
         dateOfBirth: "1991-10-01"
     }
     before(function(done){
-    chai.request(server).post('/users/login')
-    .send({
-        "username": "katie",
-        "password": "katie"
-    })
-    .end((err, res) => {
-    token=res.text;
-    done();
-    })
+        chai.request(server).post('/users/login')
+        .send({
+            "username": "katie",
+            "password": "katie"
+        })
+        .end((err, res) => {
+            token=res.text;
+            done();
+        })
     })
 
     // ---- /PERSON TEST ---- //
     it('It should readAll from are queries and build a basic profile for the user', (done) => {
-    // Arrange
-    chai.request(server)
-    // Act
-    .get('/queryPerson/person')
-    .query(testPerson)  
-    .set("Authorization", "Bearer " + token)
-    .end((err, res) => {
-    if(err){
-    done(err);            
-    }
-    // Assert
-    const PersonBody = res.body;
-    expect(res).to.have.status(200);
-    expect(PersonBody).to.not.be.null;
-    PersonBody.map((queryPersonRoute) => {
-    expect(queryPersonRoute).to.include.keys('surname');
-    // expect(queryPersonRoute).to.contain.keys('citizenID');
-    // expect(queryPersonRoute).to.contain.keys('placeOfBirth');
-    // expect(queryPersonRoute).to.contain.keys('forenames');
-    // expect(queryPersonRoute).to.contain.keys('dateOfBirth');
-    // expect(queryPersonRoute).to.contain.keys('sex');
+        // Arrange
+        chai.request(server)
+        // Act
+        .get('/queryPerson/person')
+        .query(testPerson)  
+        .set("Authorization", "Bearer " + token)
+        .end((err, res) => {
+            if(err){
+                done(err);            
+            }
+            // Assert
+            const PersonBody = res.body;
+            expect(res).to.have.status(200);
+            expect(PersonBody).to.not.be.null;
+            PersonBody.map((queryPersonRoute) => {
+                expect(queryPersonRoute).to.include.keys('surname');
+                // expect(queryPersonRoute).to.contain.keys('citizenID');
+                // expect(queryPersonRoute).to.contain.keys('placeOfBirth');
+                // expect(queryPersonRoute).to.contain.keys('forenames');
+                // expect(queryPersonRoute).to.contain.keys('dateOfBirth');
+                // expect(queryPersonRoute).to.contain.keys('sex');
 
-    expect(queryPersonRoute.forenames).to.be.a('string');
-    expect(queryPersonRoute.surname).to.be.a('string');
-    expect(queryPersonRoute.placeOfBirth).to.be.a('string');
-    expect(queryPersonRoute.dateOfBirth).to.be.a('string');
+                expect(queryPersonRoute.forenames).to.be.a('string');
+                expect(queryPersonRoute.surname).to.be.a('string');
+                expect(queryPersonRoute.placeOfBirth).to.be.a('string');
+                expect(queryPersonRoute.dateOfBirth).to.be.a('string');
+            })
+
+            done();
+        })
+
+
+
     })
-    done();
-    })
-
-
-
-})
     // ---- /MOBILE TEST ---- //
     it('It should readAll mobile data from the queries and build a basic profile', (done) => {
         chai.request(server)

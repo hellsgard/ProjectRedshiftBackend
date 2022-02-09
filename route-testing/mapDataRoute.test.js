@@ -7,6 +7,7 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 describe('Map Data route tests', function(){
+    this.timeout(60000) // Test timeout. Gives queries enough time to run.
 
     let token;
     let testPerson = {
