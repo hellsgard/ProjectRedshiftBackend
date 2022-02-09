@@ -1,19 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const citizenRoutes = require('./routes/citizenRoutes.js');
-const peopleBankAccountRoutes = require('./routes/peopleBankAccountRoutes.js');
 const userRoute = require ('./routes/userRoute');
-const atmPointRoute = require ('./routes/atmPointRoute');
-const queryPersonRoute = require('./routes/queryPersonRoute');
-const atmTransactionsRoute = require('./routes/atmTransactionsRoute.js')
-const vehiclesRoute = require('./routes/vehiclesRoute.js')
-const bankCardRoutes = require ('./routes/bankCardRoutes')
-const anprCameraRoute = require ('./routes/anprCameraRoute');
 const queryIncidentRoute = require('./routes/queryIncidentRoute.js');
+const queryPersonRoute = require('./routes/queryPersonRoute');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const mapDataRoute = require('./routes/mapDataRoute.js');
-const suspectProfile = require('./routes/suspectProfile.js');
-const mobileCallRoutes = require('./routes/mobileCallRoutes.js');
 const passport = require('passport');
 const flash = require('express-flash'); 
 const session = require('express-session'); 
@@ -32,21 +23,10 @@ app.use(express.json());
 
 
 // ROUTES
-// app.use('/citizen', citizenRoutes);
-// app.use('/peopleBankAccount', peopleBankAccountRoutes);
-// app.use('/bankCard', bankCardRoutes);
-// app.use('/atmTransactions', atmTransactionsRoute)
-// app.use('/atmPoint', atmPointRoute);
 app.use('/queryPerson', queryPersonRoute);
 app.use('/queryIncident', queryIncidentRoute);
 app.use('/queryFlees', querySuspectFleesRoute);
 app.use('/mapData', mapDataRoute);
-// app.use('./vehicles', vehiclesRoute)
-// app.use('/anprCamera', anprCameraRoute);
-// app.use('/suspectProfile', suspectProfile)
-// app.use('./basicInfo', suspectProfile);
-// app.use('./mobileCall', mobileCallRoutes);
-
 
 
 // //PASSPORT TRY 2
