@@ -2,7 +2,7 @@
 const {expect} = require('chai');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { DOUBLE } = require('sequelize/types');
+// const { DOUBLE } = require('sequelize/types');
 const server = require('../server');
 
 chai.use(chaiHttp);
@@ -15,7 +15,6 @@ describe('queryPerson route tests', function(){
         forenames: "john",
         dateOfBirth: "1991-10-01"
     }
-
     before(function(done){
     chai.request(server).post('/users/login')
     .send({
@@ -301,7 +300,7 @@ describe('queryPerson route tests', function(){
             expect(queryEposDataRoute.cardNumber).to.be.a('string');
             expect(queryEposDataRoute.eposId).to.be.a('string');
             expect(queryEposDataRoute.timestamp).to.be.a(date);
-            expect(queryEposDataRoute.amount).to.be.a(DOUBLE);
+            expect(queryEposDataRoute.amount).to.be.a('string');
             expect(queryEposDataRoute.vendor).to.be.a('string');
             expect(queryEposDataRoute.latitude).to.be.a('string');
             expect(queryEposDataRoute.longitude).to.be.a('string');
@@ -340,7 +339,7 @@ describe('queryPerson route tests', function(){
             expect(queryAtmDataRoute.timestamp).to.be.a('string');
             expect(queryAtmDataRoute.operator).to.be.a('string');
             expect(queryAtmDataRoute.streetName).to.be.a(date);
-            expect(queryAtmDataRoute.postcode).to.be.a(DOUBLE);
+            expect(queryAtmDataRoute.postcode).to.be.a('string');
             expect(queryAtmDataRoute.latitude).to.be.a('string');
             expect(queryAtmDataRoute.longitude).to.be.a('string');
             })

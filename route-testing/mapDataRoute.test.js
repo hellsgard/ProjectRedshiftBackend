@@ -28,32 +28,7 @@ describe('Map Data route tests', function(){
     })
     
         // ---- /MAP TEST ---- //
-    it('It should complete 3 queries on MYSQL and read the data', (done) => {
-    // Arrange
-    chai.request(server)
-    // Act
-    .get('/login')
-    .query(testPerson)  
-    .set("Authorization", "Bearer " + token)
-    .end((err, res) => {
-    if(err){
-    done(err);            
-    }
-    // Assert
-    const body = res.body;
-    expect(res).to.have.status(200);
-    expect(body).to.not.be.null;
-    body.map((queryPersonRoute) => {
-    expect(userRoute).to.contain.keys('surname');
-    expect(userRoute).to.contain.keys('forenames');
-    expect(userRoute.forenames).to.be.a('String');
-    expect(userRoute.surname).to.be.a('String');
-    })
-    })
-    done();
-    })
-
-    it('It should read all known associates and get the basic information', (done) => {
+       it('It should read all known associates and get the basic information', (done) => {
         chai.request(server)
         .get('/queryPerson/atmData/')
         .query(testPerson)  
