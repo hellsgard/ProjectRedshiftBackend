@@ -6,13 +6,9 @@ const queryPersonRoute = require('./routes/queryPersonRoute');
 const querySuspectFleesRoute = require('./routes/querySuspectFleesRoute.js');
 const mapDataRoute = require('./routes/mapDataRoute.js');
 const passport = require('passport');
-const flash = require('express-flash'); 
-const session = require('express-session'); 
-const jwt = require('jsonwebtoken');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const LocalStrategy = require('passport-local').Strategy;
-
 
 
 const app = express();
@@ -23,17 +19,18 @@ app.use(express.json());
 
 
 // ROUTES
-app.use('/queryPerson', queryPersonRoute);
-app.use('/queryIncident', queryIncidentRoute);
-app.use('/queryFlees', querySuspectFleesRoute);
-app.use('/mapData', mapDataRoute);
+
+app.use('/queryPerson', passport.authenticate('jwt'), queryPersonRoute); // means everything has to be authenticated
+app.use('/queryIncident', passport.authenticate('jwt'), queryIncidentRoute);
+app.use('/queryFlees', passport.authenticate('jwt'), querySuspectFleesRoute);
+app.use('/mapData', passport.authenticate('jwt'), mapDataRoute);
+app.use('/users', userRoute)
+
 
 
 // //PASSPORT TRY 2
 app.use(logger('dev'));
 app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(session);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -42,21 +39,27 @@ const bcrypt = require('bcrypt');
 
 
 passport.use(new LocalStrategy(function(username, password, done) {
-  User.findOne({where: {username:username}}).then(user => {
-    // if (password === user.password) return done(null, user);
-     if (bcrypt.compare(password, user.password)) return done(null, user); 
+
+  User.findOne({where: {username:username}})
+  .then(user => {
+    bcrypt.compare(password, user.password, (err, result) => {
+      if(err) return done(err, false);
+      return done(null, user);
+    })
+
   })
-  .catch(error => done(error, false)); // put in message here that says wrong
+  .catch(error => done(error, user)); // saying it can't find user?
 })); 
 
 // put in a function for authentication here
 passport.serializeUser(function(user,done) {
   return done(null, user.id);
-}); // keeps a person signed in - but no session..?
+}); // keeps a person signed in 
 passport.deserializeUser(function(id, done) {
   User.findByPk(id).then(user => done(null, user)).catch(error => done(error, false));
-}); // for logging out
+}); // for logging out?
 
+//JWT strategy
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -64,62 +67,16 @@ opts.secretOrKey = 'Marmoset';
 opts.algorithms = ['HS256'];
 
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-  User.findById(jwt_payload.sub, function (err, user) {
-      console.log(err, user);
-      if (err) {
-          return done(err, false);
-      }
-      if (user) {
-          return done(null, user);
-      } else {
-          return done(null, false);
-          // or you could create a new account
-      }
-  });
+  User.findByPk(jwt_payload.sub).then(user => done(null, user)).catch(err => done(err, false));
 }));
 
 
-
-// This should be the cookies middleware
-app.get('/', function(req, res){
-req.cookies.rememberme;
-console.log("cookies");
-});
-
-app.use('/users', userRoute)
 
 app.use(function(err, req, res, next) {
   console.log(err);
 });
 
-
-
-// app.get('/logout', function (req, res){ // for logging out - should this be in the userRoutes?
-//   req.session.destroy(function (err) {
-//     res.redirect('/'); 
-//     console.log('on logout page');
-//   });
-// });
-
-
-
-// app.use(flash());
-// app.use(session({
-//   secret: 'the secret', 
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 100 * 60 * 60 }, // I think this is a 1hr expiry for cookies
-// }))
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// //whenever an app.post comes in this middleware should run
-// app.post('/login', passport.authenticate('local', {
-//   successRedirect: '/home',
-//   failureRedirect: '/login',
-//   failureFlash: true
-// }))
+;
 
 const server = app.listen(8080, () => {
   console.log(`Server is running on port ${server.address().port}.`);
