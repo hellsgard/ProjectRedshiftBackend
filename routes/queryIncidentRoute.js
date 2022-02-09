@@ -5,6 +5,22 @@ const sequelize = require('../utils/database.js');
 
 
 router.get('/incidentVehicle', async(req, res) => {
+    const lat = req.query.latitude;
+    const lon = req.query.longitude;
+    const asNumLat = parseFloat(lat);
+    let plusOneLat = asNumLat + 0.005;
+    let minusOneLat = asNumLat - 0.005;
+    const asNumLon = parseFloat(lon);
+    let plusOneLon = asNumLon + 0.005;
+    let minusOneLon = asNumLon - 0.005;
+
+    // parse back into string
+    plusOneLat = plusOneLat.toString();
+    minusOneLat = minusOneLat.toString();
+    plusOneLon = plusOneLon.toString();
+    minusOneLon = minusOneLon.toString();
+
+
     try {
         console.log(req.query);
         const vehicles = await sequelize.query(`SELECT c.citizenID, c.forenames, c.surname, c.homeAddress, c.dateOfBirth, c.placeOfBirth, c.sex, r.registrationID, r.registrationDate, o.vehicleRegistrationNumber, r.make,
@@ -23,7 +39,31 @@ router.get('/incidentVehicle', async(req, res) => {
         type: QueryTypes.SELECT});
         console.log("incident finacial search done");
 
-        res.status(200).send([financialInfo, vehicles]);
+        const eposInfo = await sequelize.query(`SELECT ci.citizenID, pb.accountNumber, pb.bank, ba.cardNumber, et.eposId, et.timestamp, et.amount, ep.vendor, ep.latitude, ep.longitude
+            FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
+            JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId 
+            JOIN eposTransactions et ON ba.cardNumber=et.bankCardNumber
+            JOIN epos ep ON et.eposID=ep.id
+            WHERE et.timestamp BETWEEN '${req.query.lowerTime}%' AND '${req.query.higherTime}%'
+            AND ep.latitude BETWEEN '${req.query.minusOneLat}%' AND '${req.query.plusOneLat}%'
+            AND ep.longitude BETWEEN '${req.query.minusOneLon}%' AND '${req.query.plusOneLon}%';`,
+             {replacements: [req.query.timestampLower, req.query.timestampHigher, req.query.lowerLat, req.query.higherLat, req.query.lowerLong, req.query.higherLong],
+            type: QueryTypes.SELECT});
+            console.log("incident epos search done");
+
+        console.log(req.query);
+        const callsOut = await sequelize.query(`SELECT * FROM 
+        celltower t JOIN mobileCallRecords r ON r.callCellTowerId=t.cellTowerId
+        JOIN mobile m ON m.phoneNumber=r.callerMSISDN JOIN peoplemobile p ON
+        p.phoneNumber=m.phoneNumber JOIN citizen c ON c.forenames=p.forenames AND c.surname=p.surname
+        AND c.dateOfBirth=p.dateOfBirth AND c.homeAddress=p.address 
+        WHERE timestamp LIKE '${req.query.timeDate}%' AND latitude LIKE '${req.query.latitude}%' AND longitude LIKE '${req.query.longitude}%' LIMIT 5;`, {replacements: [req.query.latitude, req.query.longitude, req.query.timeDate],
+            type: QueryTypes.SELECT});
+            console.log("incident calls out search done");
+
+        res.status(200).send([financialInfo, vehicles, eposInfo, callsOut]);
+
+        
     }
     catch (error) {
         console.log(error);
