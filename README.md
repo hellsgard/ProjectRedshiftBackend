@@ -52,7 +52,7 @@ We created a risk assessment to ensure we were prepared for any issues that coul
 *figure XXX: AWS setup and RDS*
 *figure XXX: Pandas scripts used for cleaning up the data*
 
-<img src="./documentation/images/frontendGraph.PNG" alt="picture">
+<img src="./documentation/images/backendGraph.PNG" alt="picture">
 
 *snippet of the back end repository network graph*
 
