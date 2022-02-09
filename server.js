@@ -25,6 +25,7 @@ app.use('/queryFlees', querySuspectFleesRoute);
 app.use('/mapData', mapDataRoute);
 app.use('/users', userRoute)
 
+
 // //PASSPORT TRY 2
 app.use(logger('dev'));
 app.use(passport.initialize());
@@ -36,12 +37,14 @@ const bcrypt = require('bcrypt');
 
 
 passport.use(new LocalStrategy(function(username, password, done) {
+
   User.findOne({where: {username:username}})
   .then(user => {
     bcrypt.compare(password, user.password, (err, result) => {
       if(err) return done(err, false);
       return done(null, user);
     })
+
   })
   .catch(error => done(error, user)); // saying it can't find user?
 })); 
