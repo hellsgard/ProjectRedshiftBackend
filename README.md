@@ -154,13 +154,21 @@ Once we had the basic logic sorted we worked towards making our website design f
 
 *figure 20: Styling was added to the scenario 1 webpage*
 
+<img src="./documentation/images/homePage.png" alt="image of the home page">
+
+*figure 21: updated the home page styling*
+
+<img src="./documentation/images/scenario2.png" alt="image of initial page where our Scenario 2 data was output to">
+
+*figure 22: Initial scenario 2 webpage*
+
 
 ## Axios
 For our HTTP requests we used axios, a promise-based HTTP client. Axios has a simple syntax to and works well for what we are looking for. Each axios request was protected by a JWT authentication process and access to the database was restricted if this was not present in the header of the request.  
 
 <img src="./documentation/images/axiosSecurity.PNG" alt="image of the code used for sending the JWT token in the request header">
 
-*figure 21: The code used for sending the JWT token in the request header*
+*figure 23: The code used for sending the JWT token in the request header*
 
 ## Authentication
 Authentication was done using express-passport and bcrypt for hashing and comparing hashed passwords. When a user logged checks are made if the user is in the database, then the password was authenticated using bcrypt. This then creates a JWT token which is saved to local.storage and can be sent in the HTTP request headers. 
@@ -173,7 +181,7 @@ ___
 For testing the backend we used mocha chai and istanbul for coverage. Figure 22 shows the coverage for testing showing 73% coverage across all files. 
 <img src="./documentation/images/testing.png" alt="image of backend testing coverage">
 
-*figure 22: Coverage for backend testing*
+*figure 24: Coverage for backend testing*
 
 ### Frontend testing
 For testing the frontend we had initially planned to learn selenium in order to do this but time constraints meant we couldn't do this. 
@@ -181,7 +189,7 @@ For testing the frontend we had initially planned to learn selenium in order to 
 ___
 ## Stretch Goals
 ___
-A stretch goal of completing scenario 3 was thought about in the planning stage but we didn't have enough time to complete this. 
+A stretch goal was completing scenario 3 which we managed to complete. Another stretch goal was front end testing, however we did not get taught to do this so could not implement this. 
 ___
 ## Acknowledgements
 ___
