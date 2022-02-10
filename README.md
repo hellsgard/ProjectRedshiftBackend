@@ -102,7 +102,7 @@ The backend consisted of routes for each page required as well as a server.js fi
 The routes files are a combined service and controller file and contain routing information and the SQL queries. The SQL queries were run using the sequelize package.  
 
 Security and auditing was done in the backend using express-passport. Figure 10 shows how this works.
-<img src="./documentation/images/AWS.png" alt="Diagram showing the architecture of the security process">
+<img src="./documentation/images/security.png" alt="Diagram showing the architecture of the security process">
 
 *figure 10: Diagram showing the architecture of the security process*
 
