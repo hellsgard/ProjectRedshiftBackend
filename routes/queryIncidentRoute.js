@@ -27,15 +27,28 @@ router.get('/incidentVehicle', async(req, res) => {
     //parse into numbers for mathsing
     let asNumLat = parseFloat(lat);
     let asNumLon = parseFloat(lon);
+    let plusOneLon = "";
+    let minOneLon = "";
+    if (asNumLon > 0) {
+         plusOneLon = asNumLon + distance;
+         minOneLon = asNumLon - distance;
+        plusOneLon = plusOneLon.toString();
+    minOneLon = minOneLon.toString();
+        } else {
+             minOneLon = asNumLon + distance;
+             plusOneLon = asNumLon - distance;
+            plusOneLon = plusOneLon.toString();
+    minOneLon = minOneLon.toString();
+        }
     let plusOneLat = asNumLat + distance;
     let minOneLat = asNumLat - distance;
-    let plusOneLon = asNumLon + distance;
-    let minOneLon = asNumLon - distance;
+    // let plusOneLon = asNumLon + distance;
+    // let minOneLon = asNumLon - distance;
     // parse back into string for mySQL
     plusOneLat = plusOneLat.toString();
     minOneLat = minOneLat.toString();
-    plusOneLon = plusOneLon.toString();
-    minOneLon = minOneLon.toString();
+    // plusOneLon = plusOneLon.toString();
+    // minOneLon = minOneLon.toString();
     // parse dates back to strings 
     dateTimeUpper = moment(dateTimeUpper).format().toString();
     dateTimeLower =  moment(dateTimeLower).format().toString();
