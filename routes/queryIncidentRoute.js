@@ -90,7 +90,20 @@ router.get('/incidentVehicle', async (req, res) => {
         console.log("incident finacial search done");
         console.log(financialInfo);
 
-        res.status(200).send([vehicles, financialInfo ]);
+        console.log(req.query);
+        const epos = await sequelize.query(`SELECT ci.citizenID, pb.accountNumber, pb.bank, ba.cardNumber, et.eposId, et.timestamp,
+         et.amount, ep.vendor, ep.latitude, ep.longitude
+        FROM citizen ci JOIN peoplebankaccount pb ON pb.forenames=ci.forenames AND pb.surname=ci.surname AND pb.dateOfBirth=ci.dateOfBirth
+        JOIN bankcard ba ON pb.bankAccountId=ba.bankAccountId 
+        JOIN eposTransactions et ON ba.cardNumber=et.bankCardNumber
+        JOIN epos ep ON et.eposID=ep.id
+        WHERE ep.latitude<='${plusOneLat}' AND ep.latitude>='${minOneLat}'  AND ep.longitude<='${plusOneLon}'
+             AND ep.longitude>='${minOneLon}' AND et.timestamp>='${dateTimeLowerNew}' AND et.timestamp<='${dateTimeUpperNew}';`,
+            {type: QueryTypes.SELECT});
+        console.log("incident epos search done");
+        console.log(epos);
+
+        res.status(200).send([vehicles, financialInfo, epos ]);
     }
     catch (error) {
         console.log(error);
