@@ -27,12 +27,12 @@ router.delete('/logout', async (req, res, next) => {
   res.redirect(200, 'http://localhost:8080/login');
 });
 
-router.get('/logout', function (req, res){ // for logging out // doesn't currently work
-    req.logout(function (err) {
-      res.redirect('/'); 
-      console.log('on logout page');
-    });
-  });
+// router.get('/logout', function (req, res){ // for logging out // doesn't currently work
+//     req.logout(function (err) {
+//       res.redirect('/'); 
+//       console.log('on logout page');
+//     });
+//   });
 
   router.post('/register', async (req, res) => {
 
