@@ -17,11 +17,11 @@ router.get('/anpr', async (req, res, next) => {
             console.log(res);
             console.log(req.query.vehicleReg);
             console.log("HERE!!");
-            res.status(200).send(res);
+            res.send(eposInfo);
         })
-        .catch((error) => {
+         .catch((error) => {
             next(error);
-        });
-});
+         });
+ });
 
 module.exports = router;
