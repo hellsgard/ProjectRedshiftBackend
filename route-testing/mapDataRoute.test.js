@@ -31,7 +31,7 @@ describe('Map Data route tests', function(){
         // ---- /atmMap TEST ---- //
        it('It should read all atm data ready for the map', (done) => {
         chai.request(server)
-        .get('/queryPerson/atmData/')
+        .get('/mapData/atmData')
         .query(testPerson)  
         .set("Authorization", "Bearer " + token)
         .end((err, res) => {
@@ -68,9 +68,9 @@ describe('Map Data route tests', function(){
     })
 
             // ---- /anprMap TEST ---- //
-            it('It should read all known associates and get the basic information', (done) => {
+            it('It should read all anpr data ready for the map', (done) => {
                 chai.request(server)
-                .get('/queryPerson/anprMap/')
+                .get('/mapData/anprMap')
                 .query(testPerson)  
                 .set("Authorization", "Bearer " + token)
                 .end((err, res) => {
@@ -107,9 +107,9 @@ describe('Map Data route tests', function(){
             })
 
                         // ---- /anprMap TEST ---- //
-                        it('It should read all known associates and get the basic information', (done) => {
+                        it('It should read all anpr data ready for the map', (done) => {
                             chai.request(server)
-                            .get('/queryPerson/eposMap/')
+                            .get('/mapData/eposMap')
                             .query(testPerson)  
                             .set("Authorization", "Bearer " + token)
                             .end((err, res) => {
