@@ -8,7 +8,7 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 describe('queryPerson route tests', function(){
-    this.timeout(60000) // Test timeout. Gives queries enough time to run.
+    this.timeout(5000000) // Test timeout. Gives queries enough time to run.
 
     let token;
     let testPerson = {

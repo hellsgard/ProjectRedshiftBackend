@@ -7,7 +7,7 @@ const server = require('../server');
 chai.use(chaiHttp);
 
 describe('Map Data route tests', function(){
-    this.timeout(60000) // Test timeout. Gives queries enough time to run.
+    this.timeout(100000) // Test timeout. Gives queries enough time to run.
 
     let token;
     let testPerson = {
@@ -28,8 +28,8 @@ describe('Map Data route tests', function(){
     })
     })
     
-        // ---- /MAP TEST ---- //
-       it('It should read all known associates and get the basic information', (done) => {
+        // ---- /atmMap TEST ---- //
+       it('It should read all atm data ready for the map', (done) => {
         chai.request(server)
         .get('/queryPerson/atmData/')
         .query(testPerson)  
@@ -39,33 +39,112 @@ describe('Map Data route tests', function(){
         done(err);            
         }
         // Assert
-        const callRecordsOutboundBody = res.body;
+        const atmDataBody = res.body;
         expect(res).to.have.status(200);
-        expect(callRecordsOutboundBody).to.not.be.null;
-        callRecordsOutboundBody.map((queryCallRecordOutboundRoute) => {
-        expect(queryCallRecordOutboundRoute).to.contain.keys('latitude');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('longitude');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('streetName');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('vehicleRegistrationNumber');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('make');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('model');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('colour');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('driverLicenceID');
-        expect(queryCallRecordOutboundRoute).to.contain.keys('timestamp');
+        expect(atmDataBody).to.not.be.null;
+        atmDataBody.map((atmDataRoute) => {
+        expect(atmDataRoute).to.contain.keys('cardNumber');
+        expect(atmDataRoute).to.contain.keys('atmId');
+        expect(atmDataRoute).to.contain.keys('timestamp');
+        expect(atmDataRoute).to.contain.keys('amount');
+        expect(atmDataRoute).to.contain.keys('operator');
+        expect(atmDataRoute).to.contain.keys('streetName');
+        expect(atmDataRoute).to.contain.keys('postcode');
+        expect(atmDataRoute).to.contain.keys('latitude');
+        expect(atmDataRoute).to.contain.keys('longitude');
 
-        expect(queryCallRecordOutboundRoute.latitude).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.longitude).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.streetName).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.vehicleRegistrationNumber).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.make).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.model).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.colour).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.driverLicenceID).to.be.a('string');
-        expect(queryCallRecordOutboundRoute.timestamp).to.be.a('string');
+        expect(atmDataRoute.latitude).to.be.a(double);
+        expect(atmDataRoute.longitude).to.be.a(double);
+        expect(atmDataRoute.streetName).to.be.a('string');
+        expect(atmDataRoute.vehicleRegistrationNumber).to.be.a('string');
+        expect(atmDataRoute.make).to.be.a('string');
+        expect(atmDataRoute.model).to.be.a('string');
+        expect(atmDataRoute.colour).to.be.a('string');
+        expect(atmDataRoute.driverLicenceID).to.be.a('string');
+        expect(atmDataRoute.timestamp).to.be.a('string');
         })
         done();
         })
     })
+
+            // ---- /anprMap TEST ---- //
+            it('It should read all known associates and get the basic information', (done) => {
+                chai.request(server)
+                .get('/queryPerson/anprMap/')
+                .query(testPerson)  
+                .set("Authorization", "Bearer " + token)
+                .end((err, res) => {
+                if(err){
+                done(err);            
+                }
+                // Assert
+                const anprMapBody = res.body;
+                expect(res).to.have.status(200);
+                expect(anprMapBody).to.not.be.null;
+                anprMapBody.map((anprMapRoute) => {
+                expect(anprMapRoute).to.contain.keys('latitude');
+                expect(anprMapRoute).to.contain.keys('longitude');
+                expect(anprMapRoute).to.contain.keys('streetName');
+                expect(anprMapRoute).to.contain.keys('vehicleRegistrationNumber');
+                expect(anprMapRoute).to.contain.keys('make');
+                expect(anprMapRoute).to.contain.keys('model');
+                expect(anprMapRoute).to.contain.keys('colour');
+                expect(anprMapRoute).to.contain.keys('driverLicenceID');
+                expect(anprMapRoute).to.contain.keys('timestamp');
+        
+                expect(anprMapRoute.latitude).to.be.a('string');
+                expect(anprMapRoute.longitude).to.be.a('string');
+                expect(anprMapRoute.streetName).to.be.a('string');
+                expect(anprMapRoute.vehicleRegistrationNumber).to.be.a('string');
+                expect(anprMapRoute.make).to.be.a('string');
+                expect(anprMapRoute.model).to.be.a('string');
+                expect(anprMapRoute.colour).to.be.a('string');
+                expect(anprMapRoute.driverLicenceID).to.be.a('string');
+                expect(anprMapRoute.timestamp).to.be.a('string');
+                })
+                done();
+                })
+            })
+
+                        // ---- /anprMap TEST ---- //
+                        it('It should read all known associates and get the basic information', (done) => {
+                            chai.request(server)
+                            .get('/queryPerson/eposMap/')
+                            .query(testPerson)  
+                            .set("Authorization", "Bearer " + token)
+                            .end((err, res) => {
+                            if(err){
+                            done(err);            
+                            }
+                            // Assert
+                            const eposMapBody = res.body;
+                            expect(res).to.have.status(200);
+                            expect(eposMapBody).to.not.be.null;
+                            eposMapBody.map((eposDataMapRoute) => {
+                            expect(eposDataMapRoute).to.contain.keys('latitude');
+                            expect(anprMapRoute).to.contain.keys('longitude');
+                            expect(anprMapRoute).to.contain.keys('streetName');
+                            expect(anprMapRoute).to.contain.keys('vehicleRegistrationNumber');
+                            expect(anprMapRoute).to.contain.keys('make');
+                            expect(anprMapRoute).to.contain.keys('model');
+                            expect(anprMapRoute).to.contain.keys('colour');
+                            expect(anprMapRoute).to.contain.keys('driverLicenceID');
+                            expect(anprMapRoute).to.contain.keys('timestamp');
+                    
+                            expect(anprMapRoute.latitude).to.be.a('string');
+                            expect(anprMapRoute.longitude).to.be.a('string');
+                            expect(anprMapRoute.streetName).to.be.a('string');
+                            expect(anprMapRoute.vehicleRegistrationNumber).to.be.a('string');
+                            expect(anprMapRoute.make).to.be.a('string');
+                            expect(anprMapRoute.model).to.be.a('string');
+                            expect(anprMapRoute.colour).to.be.a('string');
+                            expect(anprMapRoute.driverLicenceID).to.be.a('string');
+                            expect(anprMapRoute.timestamp).to.be.a('string');
+                            })
+                            done();
+                            })
+                        })
+            
 
 
 
