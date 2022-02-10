@@ -42,8 +42,8 @@ router.get('/incidentVehicle', async (req, res) => {
     // parse back into string for mySQL
     plusOneLat = plusOneLat.toString();
     minOneLat = minOneLat.toString();
-    plusOneLon = plusOneLon.toString();
-    minOneLon = minOneLon.toString();
+    // plusOneLon = plusOneLon.toString();
+    // minOneLon = minOneLon.toString();
     // parse dates back to strings 
     dateTimeUpper = moment(dateTimeUpper).format().toString();
     dateTimeLower = moment(dateTimeLower).format().toString();
