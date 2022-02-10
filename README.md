@@ -49,11 +49,11 @@ For planning the project we used a Jira board and organised the work into 2 one 
 ### Version Control
 For version control we used github, we had 2 repositories for backend and frontend respectively and used branch protection rules for the main and dev branches. We worked using a feature branch model as can be seen from figure 3 and 4, which show the network graphs for the repos
 
-<img src="./documentation/images/backendGraph.PNG" alt="picture">
+<img src="./documentation/images/backendGraph.png" alt="picture">
 
 *figure 3: Snapshot of the back end repository network graph*
 
-<img src="./documentation/images/frontendGraph.PNG" alt="picture">
+<img src="./documentation/images/frontendGraph.png" alt="picture">
 
 *figure 4: Snapshot of the front end repository network graph*
 
@@ -63,15 +63,15 @@ As a group we discussed the different options for technology to use for the back
 ### Frontend
 We determined the best way to implement the front end was by using React. But before we started coding anything we worked together and with our Product Owner (PO) to produce a wireframe so that we could refer back to it in development. One brief from the PO was to have the website look sleek and professional, so we tried to ensure this with the wireframe. Figures 5-7 show the wireframes used in development. 
 
-<img src="./documentation/images/loginWireframe.PNG" alt="picture">
+<img src="./documentation/images/loginWireframe.png" alt="picture">
 
 *figure 5: Wireframe plan for the login page*
 
-<img src="./documentation/images/homeWireframe.PNG" alt="picture">
+<img src="./documentation/images/homeWireframe.png" alt="picture">
 
 *figure 6: Wireframe plan for the home page*
 
-<img src="./documentation/images/scenario1Wireframe.PNG" alt="picture">
+<img src="./documentation/images/scenario1Wireframe.png" alt="picture">
 
 *figure 7: Wireframe plan for the scenario1 page*
 
@@ -118,19 +118,19 @@ The Frontend for this project was written using the JavaScript framework React. 
 Once we had the basic logic sorted we worked towards making our website design fit the wireframe we had planned initially. There was a fair amount of website evolution as can be seen from figures 12-20. The react-bootstrap CSS library was used to style the website, and using this meant that we could make the website look both professional and user friendly. 
 
 
-<img src="./documentation/images/loginPage.PNG" alt="image of the login page">
+<img src="./documentation/images/loginPage.png" alt="image of the login page">
 
 *figure 12: Final login page*
 
-<img src="./documentation/images/cards1.PNG" alt="image of initial output of the cards with no styling">
+<img src="./documentation/images/cards1.png" alt="image of initial output of the cards with no styling">
 
 *figure 13: initial output of the cards with no styling*
 
-<img src="./documentation/images/styledCard.PNG" alt="image of the cards with styling">
+<img src="./documentation/images/styledCard.png" alt="image of the cards with styling">
 
 *figure 14: cards with styling*
 
-<img src="./documentation/images/loading.PNG" alt="picture">
+<img src="./documentation/images/loading.png" alt="picture">
 
 *figure 15: Image showing the loading page*
 
@@ -138,19 +138,19 @@ Once we had the basic logic sorted we worked towards making our website design f
 
 *figure 16: The initial page where our Scenario1 data was output to*
 
-<img src="./documentation/images/addedTabs.PNG" alt="image of tabs being used to separate the data">
+<img src="./documentation/images/addedTabs.png" alt="image of tabs being used to separate the data">
 
 *figure 17: Tabs were added to separate the data*
 
-<img src="./documentation/images/webProgress.PNG" alt="image of the loading message">
+<img src="./documentation/images/webProgress.png" alt="image of the loading message">
 
 *figure 18: A loading message was added to appear on the map whilst data was being fetched.*
 
-<img src="./documentation/images/mapMarkers.PNG" alt="image of markers on the map">
+<img src="./documentation/images/mapMarkers.png" alt="image of markers on the map">
 
 *figure 19: Markers were added to the map to show a suspects recent whereabouts*
 
-<img src="./documentation/images/styledPage.PNG" alt="image of the scenario 1 webpage with styling">
+<img src="./documentation/images/styledPage.png" alt="image of the scenario 1 webpage with styling">
 
 *figure 20: Styling was added to the scenario 1 webpage*
 
@@ -171,7 +171,7 @@ ___
 
 ### Backend testing
 For testing the backend we used mocha chai and istanbul for coverage. Figure 22 shows the coverage for testing showing 73% coverage across all files. 
-<img src="./documentation/images/testing.PNG" alt="image of backend testing coverage">
+<img src="./documentation/images/testing.png" alt="image of backend testing coverage">
 
 *figure 22: Coverage for backend testing*
 
