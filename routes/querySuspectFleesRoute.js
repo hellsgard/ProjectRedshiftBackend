@@ -11,16 +11,17 @@ router.get('/anpr', async (req, res, next) => {
     JOIN vehicleObservations vo ON vr.vehicleRegistrationNo= vo.vehicleRegistrationNumber
     JOIN anprcamera ac ON vo.ANPRPointId= ac.anprId
     WHERE vo.vehicleRegistrationNumber = ?;`,
-        { replacements: [req.query.vehicleRegistrationNumber], type: QueryTypes.SELECT }).then((result) => {
-            console.log("is anpr stuff working?")
-            console.log(eposInfo);
-            console.log(req.query.vehicleRegistrationNumber);
-            res.status(200).send(eposInfo);
+        { replacements: [req.query.vehicleReg], type: QueryTypes.SELECT })
+        .then((res) => {
+            console.log("is scenario 3 stuff working?")
+            console.log(res);
+            console.log(req.query.vehicleReg);
+            console.log("HERE!!");
+            res.status(200).send(res);
         })
         .catch((error) => {
             next(error);
         });
-
 });
 
 module.exports = router;
