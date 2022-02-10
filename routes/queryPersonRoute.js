@@ -105,7 +105,12 @@ router.get('/callRecordsOutbound', async (req, res, next) => {
 
 router.get("/byID", async (req, res) => {
   const suspectProfile = await sequelize.query(
-    `SELECT * FROM citizen c JOIN peoplemobile m on c.homeAddress=m.address WHERE citizenID=?;`,
+     `SELECT ci.citizenID, ci.forenames, ci.surname, ci.homeAddress, pm.phoneNumber, ci.dateOfBirth, 
+    ci.sex, pa.passportNumber, pa.nationality, pa.placeOfBirth 
+    FROM peoplemobile pm 
+    JOIN citizen ci ON pm.forenames=ci.forenames AND pm.surname=ci.surname AND pm.dateOfBirth=ci.dateOfBirth 
+    JOIN passport pa ON pa.givenName=ci.forenames AND pa.surname=ci.surname AND pa.dob=ci.dateOfBirth
+    WHERE ci.citizenID = ?;`,
     { replacements: [req.query.citizenID], type: QueryTypes.SELECT }
   );
 
