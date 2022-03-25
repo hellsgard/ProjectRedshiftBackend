@@ -196,7 +196,7 @@ ___
 Without the help of Jordan Harrison and Reece Elder from QA this project would not have gotten off the ground along with all the work from our fantastic team members.
 
 * Katie Diggory
-* Helen Gardener
+* Helen Gardner
 * Christopher Jones
 * Daniel Robinson
 * Humairaa Saleh
